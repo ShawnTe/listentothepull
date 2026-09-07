@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In - Listen to the Pull</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Public+Sans:wght@400;700&family=Crushed&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --base: #FFFFFF;
+    --cream: #FAF4EB;
+    --amber: #FFAE3F;
+    --coral: #FF7656;
+    --olive: #465813;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--olive);
+    font-family: 'Public Sans', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .site-header {
+    padding: 48px 20px 28px;
+    text-align: center;
+  }
+
+  .kicker {
+    font-family: 'Crushed', 'Fraunces', serif;
+    font-size: 26px;
+    letter-spacing: 0.5px;
+    color: var(--coral);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1.15;
+    color: var(--olive);
+    margin: 0 0 12px;
+  }
+
+  .subtitle {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--olive);
+    margin: 0;
+  }
+
+  .card {
+    background: var(--base);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin: 0 0 36px;
+    box-shadow: 0 2px 14px rgba(70, 88, 19, 0.10);
+    text-align: center;
+  }
+
+  .card p {
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0 0 20px;
+  }
+
+  .step-icon {
+    font-size: 32px;
+    margin: 0 0 14px;
+  }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    background: var(--coral);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .cta-btn:hover {
+    opacity: 0.85;
+  }
+
+  footer {
+    text-align: center;
+    padding: 8px 20px 40px;
+    font-size: 12px;
+    opacity: 0.6;
+  }
+
+  @media (min-width: 600px) {
+    .wrap { max-width: 560px; }
+    .site-header { padding: 64px 20px 36px; }
+    .kicker { font-size: 30px; }
+    h1 { font-size: 40px; }
+    .subtitle { font-size: 19px; }
+    .card { padding: 36px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header wrap">
+  <p class="kicker">Listen to the Pull</p>
+  <h1>You're in!</h1>
+  <p class="subtitle">Your Push vs. Pull Compass is ready.</p>
+</header>
+
+<div class="wrap">
+  <section class="card">
+    <div class="step-icon">🎉</div>
+    <p>Thanks for confirming your email. Your compass is one click away.</p>
+    <a class="cta-btn" href="/downloads/push-vs-pull-field-guide.pdf">Download the Compass (PDF)</a>
+  </section>
+</div>
+
+<footer>&copy; 2026 Listen to the Pull</footer>
+
+</body>
+</html>
