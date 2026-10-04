@@ -258,17 +258,291 @@
       margin: 4px 0 0;
     }
   }
+  /* ---------- Bands ---------- */
+
+  .site-header {
+    position: relative;
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .site-header .wrap { position: relative; }
+
+  .site-header .welcome {
+    text-align: left;
+    margin-top: 40px;
+  }
+
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .glow-a {
+    width: 420px;
+    height: 420px;
+    background: var(--amber);
+    top: -160px;
+    left: -120px;
+    animation: drift-a 18s ease-in-out infinite alternate;
+  }
+
+  .glow-b {
+    width: 360px;
+    height: 360px;
+    background: var(--coral);
+    top: 120px;
+    right: -140px;
+    opacity: 0.25;
+    animation: drift-b 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift-a { to { transform: translate(80px, 60px) scale(1.1); } }
+  @keyframes drift-b { to { transform: translate(-70px, 90px) scale(0.92); } }
+
+  /* Sticker: change --tilt to adjust the angle */
+
+  .sticker-wrap {
+    --tilt: -30deg;
+    display: flex;
+    justify-content: center;
+    /* extra room: a rotated sticker overflows its layout box */
+    margin: 0;
+    padding: 96px 0 88px;
+  }
+
+  .sticker {
+    width: min(56vw, 252px);
+    height: auto;
+    border-radius: 6px;
+    transform: rotate(var(--tilt));
+    filter: drop-shadow(0 10px 18px rgba(70, 88, 19, 0.28));
+    transition: transform 0.4s cubic-bezier(.3, 1.6, .5, 1);
+  }
+
+  .sticker:hover { transform: rotate(calc(var(--tilt) + 6deg)) scale(1.04); }
+
+  .motion .sticker-wrap.in .sticker {
+    animation: slap 0.6s cubic-bezier(.3, 1.5, .5, 1) 0.25s both;
+  }
+
+  @keyframes slap {
+    from { transform: rotate(calc(var(--tilt) - 14deg)) scale(1.35); opacity: 0; }
+    to { transform: rotate(var(--tilt)) scale(1); opacity: 1; }
+  }
+
+  /* Desktop: title on the left, sticker across from it on the right */
+  @media (min-width: 900px) {
+    .site-header .wrap {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 56px;
+    }
+
+    .site-header .kicker,
+    .site-header h1 {
+      grid-column: 1;
+      text-align: left;
+    }
+
+    .site-header .kicker { grid-row: 1; align-self: end; }
+    .site-header h1 { grid-row: 2; align-self: start; white-space: nowrap; }
+
+    .sticker-wrap {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+      justify-content: flex-start;
+      padding: 40px 0;
+    }
+
+    .sticker { width: 250px; max-width: none; }
+
+    .site-header .welcome {
+      grid-column: 1 / -1;
+      margin-top: 72px;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .sticker { width: 306px; }
+  }
+
+  .band { padding: 72px 0; }
+
+  .band-white { background: var(--base); }
+  .band-cream { background: var(--cream); }
+
+  .band-olive {
+    background: var(--olive);
+    color: var(--cream);
+  }
+
+  .band-olive .eyebrow,
+  .band-olive .pull-quote { color: var(--amber); }
+
+  .band .movement:last-child { margin-bottom: 0; }
+
+  .band-signup {
+    background: linear-gradient(160deg, var(--coral), var(--amber));
+    text-align: center;
+  }
+
+  .signup-kicker { color: var(--base); margin: 0; }
+
+  .band-signup .signup-slot { margin: 0; }
+
+  .band-signup #_form_1_ {
+    border-color: var(--base) !important;
+    box-shadow: 0 18px 50px rgba(70, 88, 19, 0.22);
+    border-radius: 16px !important;
+  }
+
+  footer {
+    background: var(--olive);
+    color: var(--cream);
+    opacity: 1;
+    padding-top: 28px;
+  }
+
+  /* ---------- Reveal ---------- */
+
+  .motion .reveal,
+  .motion .movement {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .motion .reveal.in,
+  .motion .movement.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glow { animation: none; }
+  }
+
+  @media (min-width: 900px) {
+    .band { padding: 112px 0; }
+  }
 </style>
 </head>
 <body>
 
-<header class="site-header wrap">
-  <p class="kicker">Listen to the Pull</p>
-  <h1>F*ck the plan.<br>Listen to the Pull.</h1>
+<header class="site-header">
+  <div class="glow glow-a" aria-hidden="true"></div>
+  <div class="glow glow-b" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker reveal">Listen to the Pull</p>
+    <h1 class="reveal">F*ck the plan.<br>Listen to the Pull.</h1>
+    <div class="sticker-wrap reveal">
+      <img class="sticker" src="images/sticker.png" alt="Sticker: F*ck the plan. Listen to the Pull .com">
+    </div>
+    <section class="content welcome reveal">
+    <p class="lede">Hello, beautiful soul.</p>
+    <p>If you're here, maybe you saw the sticker: &ldquo;F*ck the plan. Listen to the Pull&rdquo; and made you laugh, made you curious, or made you think: Yes. That.</p>
+    <p>So let's begin with a welcome.</p>
+    </section>
+  </div>
 </header>
 
-<div class="wrap">
+<div class="band band-white">
+  <div class="wrap">
+    <section class="content">
+    <div class="movement">
+      <h2 class="eyebrow">The Old Way</h2>
+      <div class="movement-body">
+        <p>I believe there is another way to navigate a life.</p>
+        <p>We've been taught to know what we want, make a plan, set the goal, and go after it. To push through uncertainty. To keep moving. To be productive. To optimize. To figure it out.</p>
+        <p>And sometimes that works.</p>
+        <p>But sometimes something inside you is saying, There's something else.</p>
+        <p>Maybe you can feel a chapter coming to a close, but you have no idea what comes next.</p>
+        <p>Maybe something feels off, but you can't quite articulate what.</p>
+        <p>Maybe you're curious about something that makes absolutely no sense on paper.</p>
+        <p>Maybe something simply feels right.</p>
+      </div>
+    </div>
+    </section>
+  </div>
+</div>
 
+<div class="band band-olive">
+  <div class="wrap">
+    <section class="content">
+    <div class="movement">
+      <h2 class="eyebrow">The Pull</h2>
+      <div class="movement-body">
+        <p>That's where I'm interested in listening.</p>
+        <p>Because I believe we have access to information within ourselves that can help us navigate our lives — information that doesn't always arrive as a five-year plan or a perfectly articulated goal.</p>
+        <p class="pull-quote">I call it the Pull.</p>
+        <p>The Pull might feel like curiosity. A spark. A nudge. A sense of aliveness. A quiet knowing. Sometimes it's a restlessness. Sometimes it's a persistent feeling that something is changing.</p>
+        <p>It doesn't tell you what to do. It asks you to pay attention — to listen, explore, experiment, and let your experience teach you something you couldn't have known from the beginning.</p>
+        <p>It's about developing a deeper relationship with your own Knowing — one that doesn't ask you to throw out your plans, go passive, or wait for the universe to hand you an answer.</p>
+      </div>
+    </div>
+    </section>
+  </div>
+</div>
+
+<div class="band band-cream">
+  <div class="wrap">
+    <section class="content">
+    <div class="movement">
+      <h2 class="eyebrow">The Practice</h2>
+      <div class="movement-body">
+        <p>So that you can recognize when to move, when to wait, when to investigate, when to let something go — and when you're trying to force certainty because uncertainty makes you uncomfortable.</p>
+        <p>Maybe you can learn to navigate your life sourced from within, without needing to have all the answers.</p>
+        <p>That's what I'm exploring here.</p>
+      </div>
+    </div>
+
+    <div class="movement">
+      <h2 class="eyebrow">The Invitation</h2>
+      <div class="movement-body">
+        <p>And I'd love to have you along on the journey.</p>
+        <p>Sign up and I'll send you the Push vs. Pull Compass to help deepen your sense of which one's driving.</p>
+        <p>Welcome.</p>
+        <p>Let's see where the Pull takes us.</p>
+      </div>
+    </div>
+    </section>
+
+    <a class="signup-jump reveal" href="#signup-1">
+      <h2>Ready for the Compass</h2>
+      <p>Stop pushing. Start noticing the pull.</p>
+      <span class="jump-btn">Get it below ↓</span>
+    </a>
+  </div>
+</div>
+
+<div class="band band-white">
+  <div class="wrap">
+    <section class="content about reveal">
+    <div class="about-photo">
+      <img src="images/shawn-in-nature.jpg" alt="Shawn">
+    </div>
+    <div class="about-body">
+      <p class="lede">Hi, I'm Shawn.</p>
+      <p>I arrived at this philosophy by living it, more than once.</p>
+      <p>The first time was small: I was stuck on the couch, restless in a way I couldn't explain, and I decided to bicycle tour through Italy. I didn't have a reason that would've held up in an interview. I just knew, and I went.</p>
+      <p>Later, I gave that kind of knowing away. I got into a relationship with someone I treated as a mentor, and it became emotionally and financially exploitative. I stopped trusting what I knew. I lost contact with my own authority for a long time, and it took years to build it back.</p>
+      <p>I rebuilt it slowly, by trying things rather than figuring myself out on paper. Then, at 41, I felt a pull I couldn't fully justify and became a digital nomad with no plan past the first stop in Mexico. At 45, most of the "sensible" next moves felt like a dark hallway, and coding felt like rainbows and light (go figure!), so I trusted that instead and became a software engineer.</p>
+      <p>None of that was on a five-year plan. Every one of those turns started with the same thing: something had my attention, and I followed it before I knew where it led.</p>
+      <p>That's not beginner's luck. That's thirty years of proof that the pull is a more reliable compass than the plan. Now I help people skim the scum of mental noise so they can navigate the clear waters of self-trust.</p>
+    </div>
+    </section>
+  </div>
+</div>
+
+<div class="band band-signup">
+  <div class="wrap">
+    <p class="kicker signup-kicker reveal">The Compass</p>
   <section class="signup-slot" id="signup-1">
 <style>@import url(https://fonts.bunny.net/css?family=oswald:700|playfair-display:700|work-sans:400|IBM+Plex+Sans:400);</style>
 <style>
@@ -901,84 +1175,24 @@ window._load_script = function(url, callback, isSubmit) {
 
 </script>
   </section>
-
-  <section class="content">
-
-    <p class="lede">Hello, beautiful soul.</p>
-    <p>If you're here, maybe you saw the sticker: &ldquo;F*ck the plan. Listen to the Pull&rdquo; and made you laugh, made you curious, or made you think: Yes. That.</p>
-    <p>So let's begin with a welcome.</p>
-
-    <div class="movement">
-      <h2 class="eyebrow">The Old Way</h2>
-      <div class="movement-body">
-        <p>I believe there is another way to navigate a life.</p>
-        <p>We've been taught to know what we want, make a plan, set the goal, and go after it. To push through uncertainty. To keep moving. To be productive. To optimize. To figure it out.</p>
-        <p>And sometimes that works.</p>
-        <p>But sometimes something inside you is saying, There's something else.</p>
-        <p>Maybe you can feel a chapter coming to a close, but you have no idea what comes next.</p>
-        <p>Maybe something feels off, but you can't quite articulate what.</p>
-        <p>Maybe you're curious about something that makes absolutely no sense on paper.</p>
-        <p>Maybe something simply feels right.</p>
-      </div>
-    </div>
-
-    <div class="movement">
-      <h2 class="eyebrow">The Pull</h2>
-      <div class="movement-body">
-        <p>That's where I'm interested in listening.</p>
-        <p>Because I believe we have access to information within ourselves that can help us navigate our lives — information that doesn't always arrive as a five-year plan or a perfectly articulated goal.</p>
-        <p class="pull-quote">I call it the Pull.</p>
-        <p>The Pull might feel like curiosity. A spark. A nudge. A sense of aliveness. A quiet knowing. Sometimes it's a restlessness. Sometimes it's a persistent feeling that something is changing.</p>
-        <p>It doesn't tell you what to do. It asks you to pay attention — to listen, explore, experiment, and let your experience teach you something you couldn't have known from the beginning.</p>
-        <p>It's about developing a deeper relationship with your own Knowing — one that doesn't ask you to throw out your plans, go passive, or wait for the universe to hand you an answer.</p>
-      </div>
-    </div>
-
-    <div class="movement">
-      <h2 class="eyebrow">The Practice</h2>
-      <div class="movement-body">
-        <p>So that you can recognize when to move, when to wait, when to investigate, when to let something go — and when you're trying to force certainty because uncertainty makes you uncomfortable.</p>
-        <p>Maybe you can learn to navigate your life sourced from within, without needing to have all the answers.</p>
-        <p>That's what I'm exploring here.</p>
-      </div>
-    </div>
-
-    <div class="movement">
-      <h2 class="eyebrow">The Invitation</h2>
-      <div class="movement-body">
-        <p>And I'd love to have you along on the journey.</p>
-        <p>Sign up and I'll send you the Push vs. Pull Compass to help deepen your sense of which one's driving.</p>
-        <p>Welcome.</p>
-        <p>Let's see where the Pull takes us.</p>
-      </div>
-    </div>
-
-  </section>
-
-  <a class="signup-jump" href="#signup-1">
-    <h2>Ready for the Compass</h2>
-    <p>Stop pushing. Start noticing the pull.</p>
-    <span class="jump-btn">Get it above ↑</span>
-  </a>
-
-  <section class="content about">
-    <div class="about-photo">
-      <img src="images/shawn-in-nature.jpg" alt="Shawn">
-    </div>
-    <div class="about-body">
-      <p class="lede">Hi, I'm Shawn.</p>
-      <p>I arrived at this philosophy by living it, more than once.</p>
-      <p>The first time was small: I was stuck on the couch, restless in a way I couldn't explain, and I decided to bicycle tour through Italy. I didn't have a reason that would've held up in an interview. I just knew, and I went.</p>
-      <p>Later, I gave that kind of knowing away. I got into a relationship with someone I treated as a mentor, and it became emotionally and financially exploitative. I stopped trusting what I knew. I lost contact with my own authority for a long time, and it took years to build it back.</p>
-      <p>I rebuilt it slowly, by trying things rather than figuring myself out on paper. Then, at 41, I felt a pull I couldn't fully justify and became a digital nomad with no plan past the first stop in Mexico. At 45, most of the "sensible" next moves felt like a dark hallway, and coding felt like rainbows and light (go figure!), so I trusted that instead and became a software engineer.</p>
-      <p>None of that was on a five-year plan. Every one of those turns started with the same thing: something had my attention, and I followed it before I knew where it led.</p>
-      <p>That's not beginner's luck. That's thirty years of proof that the pull is a more reliable compass than the plan. Now I help people skim the scum of mental noise so they can navigate the clear waters of self-trust.</p>
-    </div>
-  </section>
-
+  </div>
 </div>
 
 <footer>&copy; 2026 Listen to the Pull</footer>
+
+<script>
+(() => {
+  const els = document.querySelectorAll('.reveal, .movement');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('motion');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+})();
+</script>
 
 </body>
 </html>
