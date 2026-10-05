@@ -396,6 +396,17 @@
 
   .stirring .maybe:nth-child(even) { padding-left: clamp(0px, 8vw, 120px); }
 
+  /* the four "Maybe" lines sit back so the closing line lands */
+  .stirring .maybe:not(.turn) {
+    font-size: clamp(1.35rem, 3.2vw, 2.3rem);
+    color: var(--bone-dim);
+  }
+
+  .stirring .maybe.turn {
+    margin-top: 1.1em;
+    padding-left: 0;
+  }
+
   .floaty {
     position: absolute;
     color: var(--lavender);
@@ -526,9 +537,10 @@
     font-size: clamp(14rem, 32vw, 28rem);
     line-height: 1;
     color: var(--lavender);
-    opacity: 0.12;
-    top: -0.15em;
-    left: -0.05em;
+    opacity: 0.6;
+    text-shadow: 0 0 60px rgba(164,145,211,0.6);
+    top: -0.08em;
+    left: 0;
     pointer-events: none;
   }
 
@@ -550,17 +562,59 @@
     font-family: var(--display);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 22px;
     color: var(--lavender);
   }
+
+  .testimonial cite::before { content: '— '; }
 
   .testimonial cite span {
     font-family: var(--sans);
     text-transform: none;
     letter-spacing: 0;
-    font-size: 15px;
+    font-size: 17px;
     color: var(--bone-dim);
     margin-left: 0.5em;
+  }
+
+  /* ---------- Trust ---------- */
+
+  .trust {
+    padding-top: clamp(48px, 7vw, 88px);
+    padding-bottom: 0;
+  }
+
+  .trust-inner {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 40px) 0;
+    border-top: 1px solid rgba(164,145,211,0.3);
+    border-bottom: 1px solid rgba(164,145,211,0.3);
+    text-align: center;
+  }
+
+  .trust-mark {
+    width: 52px;
+    height: auto;
+    margin: 0 auto 1rem;
+    display: block;
+    fill: none;
+    stroke: var(--lavender);
+    stroke-width: 1.2;
+  }
+
+  .trust p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    line-height: 1.5;
+    margin: 0;
+    color: var(--bone-dim);
+  }
+
+  .trust p em {
+    font-style: italic;
+    color: var(--bone);
   }
 
   /* ---------- Prayer image ---------- */
@@ -863,6 +917,77 @@
     font-weight: 300;
   }
 
+  .after-row {
+    display: grid;
+    gap: clamp(40px, 6vw, 64px);
+    margin-top: clamp(56px, 8vw, 100px);
+    max-width: 1000px;
+  }
+
+  @media (min-width: 880px) {
+    .after-row { grid-template-columns: 1.35fr 1fr; align-items: center; }
+  }
+
+  .after-row .after { margin-top: 0; }
+
+  .mini-quote {
+    position: relative;
+    margin: 0;
+    padding: 2.25rem 1.75rem 1.75rem;
+    border-left: 2px solid var(--lavender);
+    background: linear-gradient(120deg, rgba(164,145,211,0.12), transparent 80%);
+    border-radius: 0 18px 18px 0;
+  }
+
+  .mini-quote::before {
+    content: '“';
+    position: absolute;
+    top: -0.2em;
+    left: 0.25em;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--lavender);
+    text-shadow: 0 0 30px rgba(164,145,211,0.6);
+  }
+
+  .mini-quote blockquote {
+    margin: 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    line-height: 1.45;
+  }
+
+  .mini-quote figcaption {
+    margin-top: 1.25rem;
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 18px;
+    color: var(--lavender);
+  }
+
+  .mini-quote figcaption::before { content: '— '; }
+
+  .mini-quote figcaption span {
+    display: block;
+    font-family: var(--sans);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 15px;
+    color: var(--bone-dim);
+    margin-top: 0.2rem;
+  }
+
+  .together .after p { margin: 0 0 0.4em; }
+  .together .after p:not(:last-child) { color: var(--bone-dim); }
+  .together .after em { font-style: italic; color: var(--lavender); }
+
+  .together .rhythm { margin-top: 1.5rem; }
+
   /* ---------- Samhain ---------- */
 
   .samhain {
@@ -941,49 +1066,77 @@
   /* ---------- Included ---------- */
 
   .included-grid {
-    display: grid;
-    gap: 18px;
     margin-top: 3rem;
+    max-width: 44rem;
+    border-top: 1px solid rgba(164,145,211,0.3);
   }
 
-  @media (min-width: 700px) {
-    .included-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (min-width: 1040px) {
-    .included-grid { grid-template-columns: repeat(6, 1fr); }
-    .included-grid .card:nth-child(-n+3) { grid-column: span 2; }
-    .included-grid .card:nth-child(n+4) { grid-column: span 3; }
-  }
-
-  .included-grid .card {
-    transition: transform 0.5s cubic-bezier(.2,.8,.2,1), border-color 0.5s;
-  }
-
-  .included-grid .card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(164,145,211,0.6);
+  .inc-item {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(164,145,211,0.3);
   }
 
   .included-grid .num {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 2.6rem;
+    font-size: 1.6rem;
     line-height: 1;
     color: var(--lavender);
-    display: block;
-    margin-bottom: 1.25rem;
   }
 
   .included-grid h3 {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 1.2;
-    margin: 0 0 0.6rem;
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    line-height: 1.25;
+    margin: 0 0 0.4rem;
   }
 
   .included-grid p { color: var(--bone-dim); margin: 0; font-size: 1rem; }
+
+  .logistics {
+    margin-top: clamp(40px, 6vw, 64px);
+    max-width: 44rem;
+  }
+
+  .logistics-lead {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+    line-height: 1.2;
+    margin: 0 0 1.25rem;
+  }
+
+  .logistics ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+
+  .logistics li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin: 0 0 0.6rem;
+    color: var(--bone-dim);
+  }
+
+  .logistics li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--lavender);
+    font-size: 0.8em;
+    top: 0.15em;
+  }
+
+  .logistics a:not(.btn) {
+    color: var(--lavender);
+    text-underline-offset: 3px;
+  }
 
   /* ---------- Fit ---------- */
 
@@ -1155,6 +1308,30 @@
     padding: 0.4em 0.9em;
     border-radius: 999px;
     background: rgba(236,226,208,0.12);
+  }
+
+  .strand-photo {
+    position: relative;
+    margin: 0 0 1.75rem;
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 6 / 5;
+  }
+
+  .strand-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+
+  /* soft wash of the card color so the photo sits in the palette */
+  .strand-photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(37,95,133,0.35));
+    mix-blend-mode: multiply;
   }
 
   .strand .q {
@@ -1390,6 +1567,64 @@
     50% { opacity: 0.9; transform: scale(1) rotate(45deg); }
   }
 
+  /* ---------- FAQ ---------- */
+
+  .faq-list {
+    border-top: 1px solid rgba(164,145,211,0.3);
+  }
+
+  .faq details {
+    border-bottom: 1px solid rgba(164,145,211,0.3);
+  }
+
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.4rem 0;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+    line-height: 1.3;
+    transition: color 0.3s;
+  }
+
+  .faq summary::-webkit-details-marker { display: none; }
+
+  .faq summary::after {
+    content: '+';
+    flex-shrink: 0;
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--lavender);
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+  }
+
+  .faq details[open] summary::after { transform: rotate(45deg); }
+
+  .faq summary:hover,
+  .faq details[open] summary { color: var(--lavender); }
+
+  .faq details p {
+    margin: 0;
+    padding: 0 2.5rem 1.6rem 0;
+    color: var(--bone-dim);
+    animation: faq-open 0.5s ease;
+  }
+
+  @keyframes faq-open {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .faq { padding-bottom: 0; }
+  .faq + .invitation { padding-top: clamp(80px, 10vw, 140px); }
+
   /* ---------- Invitation ---------- */
 
   .invitation {
@@ -1433,14 +1668,47 @@
   .woman-who em { color: var(--bone); font-style: italic; }
   .woman-who div:last-child em { color: var(--lavender); }
 
-  .invitation .final-cta { margin-top: 2.5rem; }
+  .invitation .final-cta {
+    margin: clamp(56px, 8vw, 96px) auto 0;
+    padding-top: clamp(48px, 7vw, 80px);
+    max-width: 40rem;
+    border-top: 1px solid rgba(164,145,211,0.3);
+  }
+
+  .invitation .certainty {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.6rem, 3.8vw, 2.6rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+  }
 
   .invitation .knows {
     font-family: var(--serif);
     font-style: italic;
-    font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+    font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+    line-height: 1.45;
     color: var(--lavender);
-    margin: 0 0 1.75rem;
+    margin: 0 auto 2.25rem;
+    max-width: 30em;
+  }
+
+  .btn:has(.label-long) { white-space: nowrap; }
+  .label-short { display: none; }
+
+  @media (max-width: 560px) {
+    .label-long { display: none; }
+    .label-short { display: inline; }
+  }
+
+  .invitation .begins {
+    font-family: var(--display);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: clamp(17px, 1.8vw, 20px);
+    color: var(--bone-dim);
+    margin: 1.75rem 0 0;
   }
 
   /* ---------- Footer ---------- */
@@ -1482,7 +1750,7 @@
 
 <nav class="nav" id="nav">
   <a class="brand" href="#top">Meaning<span class="star">✦</span>Magic<span class="star">✦</span>Momentum</a>
-  <a class="btn small" href="#investment">Join · $222</a>
+  <a class="btn small" href="https://buy.stripe.com/4gMbJ18V8fwB2c05rl8N206" data-checkout>Join · $222</a>
 </nav>
 
 <main id="top">
@@ -1514,7 +1782,7 @@
     </div>
 
     <div class="hero-inner">
-      <p class="eyebrow reveal" style="--i:0">A 4-week live circle</p>
+      <p class="eyebrow reveal" style="--i:0">Are you ready to live from your inner pull?</p>
       <h1>
         <span class="reveal" style="--i:1">Meaning</span>
         <span class="sep reveal" style="--i:2">✦</span>
@@ -1522,13 +1790,24 @@
         <span class="sep reveal" style="--i:4">✦</span>
         <span class="reveal" style="--i:5">Momentum</span>
       </h1>
-      <p class="sub reveal" style="--i:6">A 4-week live practice space for women, witches, priestesses, goddesses, and powerful femmes ready to turn what they know into how they live.</p>
+      <p class="sub reveal" style="--i:6">A 4-week live practice space to help you turn insight, ritual, and reflection into grounded choices in your life.</p>
       <div class="ctas reveal" style="--i:7">
-        <a class="btn" href="#investment">Join us · $222</a>
-        <a class="btn ghost" href="#stirring">Begin here</a>
+        <a class="btn" href="https://buy.stripe.com/4gMbJ18V8fwB2c05rl8N206" data-checkout>Join the circle · $222</a>
+        <a class="btn ghost" href="#stirring">Starts Friday, Oct. 9</a>
       </div>
     </div>
     <div class="scroll-cue" aria-hidden="true"></div>
+  </section>
+
+  <!-- ============ TRUST ============ -->
+  <section class="trust">
+    <div class="trust-inner reveal">
+      <svg class="trust-mark" viewBox="0 0 64 40" aria-hidden="true">
+        <circle cx="24" cy="20" r="16" />
+        <circle cx="40" cy="20" r="16" />
+      </svg>
+      <p>Held by <em>Simone</em> and <em>Shawn</em>, each with 20 years of deep facilitation, honest reflection, mindful productivity, ritual, and grounded integration experience.</p>
+    </div>
   </section>
 
   <!-- ============ STIRRING ============ -->
@@ -1542,85 +1821,7 @@
       <p class="maybe reveal">Maybe you felt an opening.</p>
       <p class="maybe reveal">Maybe you tasted a new version of yourself.</p>
       <p class="maybe reveal">Maybe you got really clear on something you can no longer unknow.</p>
-    </div>
-  </section>
-
-  <!-- ============ NOT JUST ============ -->
-  <section class="notjust" style="padding-top:0">
-    <div class="container narrow">
-      <p class="eyebrow reveal">And now comes the part so many people skip</p>
-      <div><span class="nj reveal">Not just receiving the insight.</span></div>
-      <div><span class="nj reveal">Not just naming the desire.</span></div>
-      <div><span class="nj reveal">Not just circling the symbol.</span></div>
-      <p class="but reveal">But letting it <em>change how you live.</em></p>
-    </div>
-  </section>
-
-  <!-- ============ BRIDGE ============ -->
-  <section class="bridge">
-    <div class="container">
-      <div class="grid">
-        <div>
-          <p class="eyebrow reveal">The practice space</p>
-          <h2 class="reveal">This is where the right brain and left brain <em>meet.</em></h2>
-          <p class="lead reveal">Meaning ✦ Magic ✦ Momentum is a 4-week live practice space for women and powerful femmes who are ready to harvest what has been revealed, root into the archetype and intention of who they are becoming, and create grounded movement in their real lives.</p>
-        </div>
-        <ul class="where">
-          <li class="reveal" style="--i:0"><span class="n">01</span><span>Where ritual meets real-life <em>follow-through.</em></span></li>
-          <li class="reveal" style="--i:1"><span class="n">02</span><span>Where the symbol becomes <em>a step.</em></span></li>
-          <li class="reveal" style="--i:2"><span class="n">03</span><span>Where the insight becomes <em>a choice.</em></span></li>
-          <li class="reveal" style="--i:3"><span class="n">04</span><span>Where the magic becomes <em>visible.</em></span></li>
-        </ul>
-      </div>
-      <div class="closing">
-        <p class="reveal">Because you are not here to choose between meaning, magic, and momentum.</p>
-        <p class="reveal">You are here to become the woman who lets <em>all three dance.</em></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ TESTIMONIAL ============ -->
-  <section class="testimonial">
-    <div class="qmark" data-speed="-0.15" aria-hidden="true">“</div>
-    <div class="container">
-      <blockquote class="reveal">
-        I felt a strong connection to my power, particularly through my womb space which is historically a place I have been very disconnected from. I also enjoyed the visualisations whereas often I can't visualise at all. I think the space must just feel very safe for me.
-        <cite>Gin <span>Super mum, founder, chaotic genius</span></cite>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- ============ REMEMBERED ============ -->
-  <section class="remembered">
-    <div class="container">
-      <div class="narrow intro">
-        <p class="eyebrow reveal">Not either / or</p>
-        <h2 class="reveal">This is not about becoming more “productive.”</h2>
-        <p class="reveal">Nor is it about staying forever in the beautiful, mystical, symbolic realm.</p>
-        <p class="reveal">This is about becoming the woman who can let all of it work together. The woman who can <strong>harvest the meaning</strong> of what she’s lived. The woman who can <strong>listen to the magic</strong> moving through her. The woman who can <strong>create momentum</strong> that is grounded, aligned, and real.</p>
-        <p class="lead reveal" style="margin-top:2rem">Because the next version of you is not built through force.</p>
-      </div>
-
-      <div class="trio-words" aria-label="She is remembered. She is chosen. She is practiced.">
-        <div class="w" data-speed="0.18" data-x="-0.25"><small>She is</small>remembered.</div>
-        <div class="w" data-speed="-0.05"><small>She is</small>chosen.</div>
-        <div class="w" data-speed="0.12" data-x="0.25"><small>She is</small>practiced.</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============ SPIRAL ============ -->
-  <section class="spiral">
-    <div class="spiral-img" data-speed="0.22" aria-hidden="true"></div>
-    <div class="container">
-      <div class="cadence">
-        <span class="reveal" style="--i:0">Moment by moment</span>
-        <span class="reveal" style="--i:1">Call by call</span>
-        <span class="reveal" style="--i:2">Move by move</span>
-      </div>
-
-      <p class="being reveal">Until you are no longer waiting to become her.<strong>You are being her.</strong></p>
+      <p class="maybe turn reveal">You are no longer who you used to be, but you're not yet who you're becoming.</p>
     </div>
   </section>
 
@@ -1685,6 +1886,187 @@
     </div>
   </section>
 
+  <!-- ============ TOGETHER ============ -->
+  <section class="together" style="overflow:hidden">
+    <div class="container">
+      <div class="narrow">
+        <p class="eyebrow reveal">What we’ll practice together</p>
+        <p class="lead reveal">Each week, we’ll move through a simple rhythm:</p>
+        <ul class="where rhythm">
+          <li class="reveal" style="--i:0"><span class="n">01</span><span><em>Reflect</em> on what your life is showing you.</span></li>
+          <li class="reveal" style="--i:1"><span class="n">02</span><span><em>Listen</em> for what matters now.</span></li>
+          <li class="reveal" style="--i:2"><span class="n">03</span><span><em>Choose</em> the grounded moves.</span></li>
+          <li class="reveal" style="--i:3"><span class="n">04</span><span><em>Move</em> by bringing that choice into your life.</span></li>
+        </ul>
+        <p class="lead reveal" style="margin-top:2.5rem">Those moves might be a conversation, a boundary, a ritual, a creative step, or one honest decision you’ve been circling.</p>
+      </div>
+
+      <!-- decorative echo of the line above -->
+      <div class="ribbon" aria-hidden="true">
+        <div class="ribbon-track" id="ribbon">
+          <span>a conversation</span><span class="star">✦</span>
+          <span>a boundary</span><span class="star">✦</span>
+          <span>a ritual</span><span class="star">✦</span>
+          <span>a creative step</span><span class="star">✦</span>
+          <span>one honest decision</span><span class="star">✦</span>
+          <span>a conversation</span><span class="star">✦</span>
+          <span>a boundary</span><span class="star">✦</span>
+          <span>a ritual</span><span class="star">✦</span>
+          <span>a creative step</span><span class="star">✦</span>
+          <span>one honest decision</span><span class="star">✦</span>
+        </div>
+      </div>
+
+      <div class="after-row">
+        <div class="after">
+          <p class="reveal">This is not about forcing yourself into productivity.</p>
+          <p class="reveal">And it is not about staying forever in the mystical realm.</p>
+          <p class="reveal">It is about letting <em>meaning, magic, and momentum</em> work together.</p>
+        </div>
+        <figure class="mini-quote reveal" style="--i:2">
+          <blockquote>I highly recommend! You feel like a renewed version of yourself and have a step forward backed with support!</blockquote>
+          <figcaption>Maria Hauser <span>Entrepreneur, Woman, Priestess</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOT JUST ============ -->
+  <!-- Hidden for now — remove the `hidden` attribute to bring it back -->
+  <section class="notjust" style="padding-top:0" hidden>
+    <div class="container narrow">
+      <p class="eyebrow reveal">And now comes the part so many people skip</p>
+      <div><span class="nj reveal">Not just receiving the insight.</span></div>
+      <div><span class="nj reveal">Not just naming the desire.</span></div>
+      <div><span class="nj reveal">Not just circling the symbol.</span></div>
+      <p class="but reveal">But letting it <em>change how you live.</em></p>
+    </div>
+  </section>
+
+  <!-- ============ INCLUDED ============ -->
+  <section class="included">
+    <div class="container">
+      <p class="eyebrow reveal">Your practice space includes</p>
+      <h2 class="reveal" style="max-width:14em">A held container for <em>real movement.</em></h2>
+      <div class="included-grid">
+        <div class="inc-item reveal" style="--i:0">
+          <span class="num">i.</span>
+          <div>
+            <h3>4 live weekly calls</h3>
+            <p>A held, intimate practice space where we work with meaning, magic, and momentum in real time. Co-led by Simone and Shawn.</p>
+          </div>
+        </div>
+        <div class="inc-item reveal" style="--i:1">
+          <span class="num">ii.</span>
+          <div>
+            <h3>Private Telegram circle</h3>
+            <p>For connection, reflection, witnessing, and support between calls.</p>
+          </div>
+        </div>
+        <div class="inc-item reveal" style="--i:2">
+          <span class="num">iii.</span>
+          <div>
+            <h3>Samhain / All Hallows Eve ritual</h3>
+            <p>A special threshold ritual to honor what is ending, what is beginning, and who you are becoming.</p>
+          </div>
+        </div>
+        <div class="inc-item reveal" style="--i:0">
+          <span class="num">iv.</span>
+          <div>
+            <h3>Guided practices &amp; integration prompts</h3>
+            <p>To help you turn insight into embodiment and movement.</p>
+          </div>
+        </div>
+        <div class="inc-item reveal" style="--i:1">
+          <span class="num">v.</span>
+          <div>
+            <h3>A grounded, magical circle of women</h3>
+            <p>Because sometimes the biggest shift happens when your becoming is witnessed and normalized.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="logistics reveal">
+        <p class="logistics-lead">We begin Friday, 10/9.</p>
+        <ul>
+          <li>Calls are held 10/9, 10/16, 10/23 &amp; 10/30.</li>
+          <li>10–11:30 am Pacific Time (<a href="https://www.timeanddate.com/worldclock/fixedtime.html?msg=Meaning+%E2%9C%A6+Magic+%E2%9C%A6+Momentum&amp;iso=20261009T10&amp;p1=224&amp;ah=1&amp;am=30" target="_blank" rel="noopener">timezone calculator</a>).</li>
+          <li>Calls are 75–90 min long.</li>
+          <li>If you miss a call you can listen to the recording (shared the same day) and connect with others in the Telegram group.</li>
+        </ul>
+        <a class="btn" href="https://buy.stripe.com/4gMbJ18V8fwB2c05rl8N206" data-checkout><span class="label-long">Join Meaning ✦ Magic ✦ Momentum · $222</span><span class="label-short">Join the circle · $222</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BRIDGE ============ -->
+  <section class="bridge">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <p class="eyebrow reveal">The practice space</p>
+          <h2 class="reveal">This is where the right brain and left brain <em>meet.</em></h2>
+          <p class="lead reveal">Meaning ✦ Magic ✦ Momentum is a 4-week live practice space for those who are ready to harvest what has been revealed, root into the archetype and intention of who they are becoming, and create grounded movement in their lives.</p>
+        </div>
+        <ul class="where">
+          <li class="reveal" style="--i:0"><span class="n">01</span><span>Where ritual meets real-life <em>follow-through.</em></span></li>
+          <li class="reveal" style="--i:1"><span class="n">02</span><span>Where the symbol becomes <em>a step.</em></span></li>
+          <li class="reveal" style="--i:2"><span class="n">03</span><span>Where the insight becomes <em>a choice.</em></span></li>
+          <li class="reveal" style="--i:3"><span class="n">04</span><span>Where the magic becomes <em>visible.</em></span></li>
+        </ul>
+      </div>
+      <div class="closing">
+        <p class="reveal">Because you are not here to choose between meaning, magic, and momentum.</p>
+        <p class="reveal">You are here to become the woman who lets <em>all three dance.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPIRAL ============ -->
+  <section class="spiral">
+    <div class="spiral-img" data-speed="0.22" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cadence">
+        <span class="reveal" style="--i:0">Moment by moment</span>
+        <span class="reveal" style="--i:1">Call by call</span>
+        <span class="reveal" style="--i:2">Move by move</span>
+      </div>
+
+      <p class="being reveal">Until you are no longer waiting to become her.<strong>You are being her.</strong></p>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL ============ -->
+  <section class="testimonial">
+    <div class="qmark" data-speed="-0.15" aria-hidden="true">“</div>
+    <div class="container">
+      <blockquote class="reveal">
+        I felt a strong connection to my power, particularly through my womb space which is historically a place I have been very disconnected from. I also enjoyed the visualisations whereas often I can't visualise at all. I think the space must just feel very safe for me.
+        <cite>Gin <span>Super mum, founder, chaotic genius</span></cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ REMEMBERED ============ -->
+  <section class="remembered">
+    <div class="container">
+      <div class="narrow intro">
+        <p class="eyebrow reveal">Not either / or</p>
+        <h2 class="reveal">This is not about becoming more “productive.”</h2>
+        <p class="reveal">Nor is it about staying forever in the beautiful, mystical, symbolic realm.</p>
+        <p class="reveal">This is about becoming the woman who can let all of it work together. The woman who can <strong>harvest the meaning</strong> of what she’s lived. The woman who can <strong>listen to the magic</strong> moving through her. The woman who can <strong>create momentum</strong> that is grounded, aligned, and real.</p>
+        <p class="lead reveal" style="margin-top:2rem">Because the next version of you is not built through force.</p>
+      </div>
+
+      <div class="trio-words" aria-label="She is remembered. She is chosen. She is practiced.">
+        <div class="w" data-speed="0.18" data-x="-0.25"><small>She is</small>remembered.</div>
+        <div class="w" data-speed="-0.05"><small>She is</small>chosen.</div>
+        <div class="w" data-speed="0.12" data-x="0.25"><small>She is</small>practiced.</div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ============ BECOMING (light) ============ -->
   <section class="becoming light" style="overflow:hidden">
     <svg class="bg-sigil" data-speed="0.15" viewBox="0 0 200 200" fill="none" stroke="#22162b" stroke-width="0.8" aria-hidden="true">
@@ -1712,44 +2094,13 @@
     </div>
   </section>
 
-  <!-- ============ TOGETHER ============ -->
-  <section class="together" style="overflow:hidden">
-    <div class="container">
-      <div class="narrow">
-        <p class="eyebrow reveal">What we’ll do together</p>
-        <h2 class="reveal">Reflect. Listen. Choose. <em>Move.</em></h2>
-        <p class="reveal">Over 4 weeks, we’ll work with Meaning, Magic, and Momentum as living practices. Each week, you’ll be invited to reflect, listen, choose, and move.</p>
-        <p class="reveal">Not in a pressure-y, performative, “fix yourself” way. But in a grounded, held, honest way.</p>
-        <p class="reveal">The kind of space where you get to be witnessed in what’s true, name what’s emerging, and take aligned action from the woman you are becoming.</p>
-        <p class="lead reveal" style="margin-top:2rem">This is the space where your inner knowing doesn’t just stay a beautiful idea. It becomes&nbsp;—</p>
-      </div>
-
-      <div class="ribbon" aria-label="A next step. A conversation. A ritual. A boundary. A creative move. A choice. A different way of being in your life.">
-        <div class="ribbon-track" id="ribbon" aria-hidden="true">
-          <span>a next step</span><span class="star">✦</span>
-          <span>a conversation</span><span class="star">✦</span>
-          <span>a ritual</span><span class="star">✦</span>
-          <span>a boundary</span><span class="star">✦</span>
-          <span>a creative move</span><span class="star">✦</span>
-          <span>a choice</span><span class="star">✦</span>
-          <span>a different way of being in your life</span><span class="star">✦</span>
-          <span>a next step</span><span class="star">✦</span>
-          <span>a conversation</span><span class="star">✦</span>
-          <span>a ritual</span><span class="star">✦</span>
-          <span>a boundary</span><span class="star">✦</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ SAMHAIN ============ -->
   <section class="samhain">
     <div class="moon" data-speed="-0.3" aria-hidden="true"></div>
     <div class="container">
       <div class="arch reveal">
-        <span class="plus">Plus</span>
-        <h2>Samhain / All Hallows Eve <em>Ritual Call</em></h2>
-        <p style="color:var(--bone-dim)">We’ll gather for a special ritual call to mark the threshold of what’s ending and what’s beginning.</p>
+        <h2>Samhain / All Hallows Eve <em>Ritual</em></h2>
+        <p style="color:var(--bone-dim)">Our last call will mark the threshold of what’s ending and what’s beginning.</p>
         <div class="lines" style="margin-top:2rem">
           <p>A moment to honor the season.</p>
           <p>To listen to what is ready to be released.</p>
@@ -1757,41 +2108,6 @@
           <p>To cross the threshold with intention.</p>
         </div>
         <p class="final">Because some moments deserve to be marked.<br>And some versions of you deserve a ritual goodbye.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ INCLUDED ============ -->
-  <section class="included">
-    <div class="container">
-      <p class="eyebrow reveal">What’s included</p>
-      <h2 class="reveal" style="max-width:14em">A held container for <em>real movement.</em></h2>
-      <div class="included-grid">
-        <div class="card reveal" style="--i:0">
-          <span class="num">i.</span>
-          <h3>4 live weekly calls</h3>
-          <p>A held, intimate practice space where we work with meaning, magic, and momentum in real time. Co-led by Simone and Shawn.</p>
-        </div>
-        <div class="card reveal" style="--i:1">
-          <span class="num">ii.</span>
-          <h3>Private Telegram circle</h3>
-          <p>For connection, reflection, witnessing, and support between calls.</p>
-        </div>
-        <div class="card reveal" style="--i:2">
-          <span class="num">iii.</span>
-          <h3>Samhain / All Hallows Eve ritual call</h3>
-          <p>A special threshold ritual to honor what is ending, what is beginning, and who you are becoming.</p>
-        </div>
-        <div class="card reveal" style="--i:0">
-          <span class="num">iv.</span>
-          <h3>Guided practices &amp; integration prompts</h3>
-          <p>To help you turn insight into embodiment and movement.</p>
-        </div>
-        <div class="card reveal" style="--i:1">
-          <span class="num">v.</span>
-          <h3>A grounded, magical circle of women &amp; femmes</h3>
-          <p>Because sometimes the biggest shift happens when your becoming is witnessed and normalized.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1851,14 +2167,15 @@
       <div class="strands">
         <article class="strand simone reveal">
           <h3 class="name">Simone</h3>
-          <p>Simone got married, became a mother, and led large-scale, multi-year media projects with Burning Man — navigating complexity, money, race, power, belonging, truth-telling, and many dicey conversations along the way.</p>
-          <p>Through it all, she became deeply practiced in holding brave, safe space where people can bring their full selves, speak what’s real, and metabolize what’s been hidden or hard to name.</p>
-          <p>She also began reconnecting more openly with the intuitive and earth-based parts of herself that had always been there:</p>
-          <ul class="pills">
-            <li>Tarot</li><li>Ancestors</li><li>Natural cycles</li><li>Moon cycles</li><li>Seasonal rituals</li><li>Racial healing</li><li>Tending belonging wounds</li>
-          </ul>
+          <p>From that front porch, Simone’s spiral led her to finding love at Burning Man, marriage, motherhood and deeper devotion to the art of holding transformational space.</p>
+          <p>That thread had begun in 2002, when she fell in love with participatory facilitation through the Art of Hosting — spaces where wisdom lives in the room, authentic truth can emerge, and people remember they belong.</p>
+          <p>Over the next two decades, she designed and held spaces around the world, from the European Parliament, the World Bank, ministries of education, Homeboy Industries, Burning Man organization, several tech start-ups and communities navigating conflict, repair, and change.</p>
+          <p>With an MA in Leadership and training as a conflict mediator, she became the one people called for the dicey conversations: money, race, power, belonging, truth.</p>
+          <p>All along, she was tending the intuitive, earth-based parts of herself too: tarot, ancestors, meditation, moon cycles, and the Celtic wheel of the year.</p>
+          <p>Today, Simone brings the ritual, magic, and deep holding of the space in between that help people evolve into the next version of themselves while honoring what’s ending, sensing what’s shifting, and trusting what’s ready to emerge.</p>
         </article>
         <article class="strand shawn reveal" style="--i:1">
+          <figure class="strand-photo"><img src="images/st-at-table.jpg" alt="Shawn smiling, leaning on a wooden picnic table outdoors"></figure>
           <h3 class="name">Shawn</h3>
           <p>Meanwhile, Shawn was walking her own spiral. Before tech, before software engineering, before the move to San Diego, before the running shoes and guitar strings and reinventions, she spent seven years as a mindful productivity coach and content creator — helping people make their days, dreams, and nervous systems work together.</p>
           <p>She was never interested in productivity for productivity’s sake. She was interested in the deeper question:</p>
@@ -1870,15 +2187,15 @@
 
       <div class="bridge-hold">
         <p class="eyebrow reveal">Together</p>
-        <h2 class="reveal narrow">They create a space where insight doesn’t just stay insight. It becomes <em>movement.</em></h2>
+        <h2 class="reveal narrow">Simone & Shawn create a space where insight doesn’t just stay insight. It becomes <em>movement.</em></h2>
         <div class="brings">
           <div class="card reveal">
-            <span class="who">Simone brings</span>
-            <p>The deep listening, the ritual, the soul-level reflection, and the <em>“let’s honor every house inside you”</em> wisdom.</p>
+            <p>"Go with an open mind and prepare to be blown away."</p>
+            <span class="who">Gin, Super mum, founder, chaotic genius</span>
           </div>
           <div class="card reveal" style="--i:1">
-            <span class="who">Shawn brings</span>
-            <p>The clarity, the grounded momentum, and the <em>“you already know — let’s help it become real”</em> energy.</p>
+            <p>"These women hold space for your own inner wisdom with such grace and love."</p>
+            <span class="who">Isabella Estrella, Visibility & Psychic Development Coach</span>
           </div>
         </div>
         <p class="lead reveal" style="margin-top:3rem">Together, they hold the bridge between the mystical and the practical.<br>The meaning, the magic, and the momentum.</p>
@@ -1899,11 +2216,11 @@
         <div class="ticket reveal" style="--i:1">
           <h3>This includes</h3>
           <ul>
-            <li>4 live weekly calls</li>
+            <li>4 live weekly calls: 10/9, 10/16, 10/23 & 10/30</li>
             <li>Private Telegram circle</li>
-            <li>Samhain / All Hallows Eve ritual call</li>
-            <li>Guided reflection and integration</li>
-            <li>A live practice space for becoming the woman who lets meaning, magic, and momentum work together</li>
+            <li>Samhain / All Hallows Eve ritual</li>
+            <li>Guided practices & integration prompts</li>
+            <li>A held space to reflect, listen, choose, and move with support</li>
           </ul>
           <a class="btn" href="https://buy.stripe.com/4gMbJ18V8fwB2c05rl8N206" data-checkout>Join us for $222</a>
           <p class="firstmove">Your first move starts here.</p>
@@ -1920,7 +2237,7 @@
         <h2>Disco Sparkle</h2>
         <div class="cols">
           <div>
-            <p class="lead">When you sign up, you’ll also see an optional, super-discounted Disco Sparkle add-on.</p>
+            <p class="lead">When you check out on Stripe, you’ll see an optional, super-discounted Disco Sparkle add-on: two 1:1 mentoring sessions to help you move from insight into aligned action.</p>
             <p>This is for you if you feel so close to a breakthrough, but you’re still in the fog.</p>
             <p>Disco Sparkle gives you more personalized support as you navigate that threshold. For the woman who knows she’s close and wants help letting the next layer click into place.</p>
           </div>
@@ -1931,6 +2248,35 @@
             <p>Maybe you know there’s a move to make, but you can’t quite see it clearly yet.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq">
+    <div class="container narrow">
+      <p class="eyebrow reveal">Questions before you join</p>
+      <div class="faq-list">
+        <details class="reveal">
+          <summary>When does the circle begin?</summary>
+          <p>We begin Friday, October 9th.</p>
+        </details>
+        <details class="reveal">
+          <summary>What if I miss a call?</summary>
+          <p>The full replay will be available the same day and shared in our private Telegram group.</p>
+        </details>
+        <details class="reveal">
+          <summary>Do I have to share in the group?</summary>
+          <p>You’ll be invited into honest reflection and participation, but you do not have to perform. This is a witnessed space, not a pressured one.</p>
+        </details>
+        <details class="reveal">
+          <summary>Is this spiritual or practical?</summary>
+          <p>Both. We’ll honor meaning, magic, ritual, and reflection — and then choose grounded moves to bring into real life.</p>
+        </details>
+        <details class="reveal">
+          <summary>What is the investment?</summary>
+          <p>The full investment is $222.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -1960,8 +2306,10 @@
       <p class="narrow reveal" style="color:var(--bone-dim)">Meaning ✦ Magic ✦ Momentum is your 4-week space to remember her, choose her, and practice being her.</p>
 
       <div class="final-cta reveal">
-        <p class="knows">If your body already knows, let this be your first move.</p>
-        <a class="btn" href="https://buy.stripe.com/4gMbJ18V8fwB2c05rl8N206" data-checkout>Join us for $222</a>
+        <p class="certainty">You do not need perfect certainty before you take your next step.</p>
+        <p class="knows">If your body already knows there is something here for you, let this be your first move.</p>
+        <a class="btn" href="https://buy.stripe.com/4gMbJ18V8fwB2c05rl8N206" data-checkout><span class="label-long">Join Meaning ✦ Magic ✦ Momentum · $222</span><span class="label-short">Join the circle · $222</span></a>
+        <p class="begins">We begin Friday.</p>
       </div>
     </div>
   </section>
