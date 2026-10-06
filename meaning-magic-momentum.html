@@ -617,6 +617,39 @@
     color: var(--bone);
   }
 
+  /* ---------- Letter ---------- */
+
+  .letter { padding-top: 0; }
+
+  .letter-inner {
+    max-width: 34rem;
+    margin: 0 auto;
+    padding-left: clamp(20px, 3vw, 32px);
+    border-left: 1px solid rgba(164,145,211,0.35);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+    line-height: 1.7;
+  }
+
+  .letter-inner p { margin: 0 0 1.15em; }
+
+  .letter .salutation,
+  .letter .signoff {
+    font-style: italic;
+    color: var(--lavender);
+  }
+
+  .letter .salutation { font-size: 1.2em; margin-bottom: 1.4em; }
+
+  .letter .signoff { font-size: 1.3em; margin: 1.6em 0 0; }
+
+  .letter .signature {
+    margin: 0.3em 0 0;
+    font-style: italic;
+    color: var(--bone);
+  }
+
   /* ---------- Prayer image ---------- */
 
   .stirring { overflow: hidden; }
@@ -1729,6 +1762,15 @@
     background: var(--midnight-deep);
   }
 
+  footer .credit {
+    flex-basis: 100%;
+    margin: 8px 0 0;
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  footer .credit a { color: inherit; text-underline-offset: 2px; }
+
   footer .mark {
     font-family: var(--display);
     letter-spacing: 0.14em;
@@ -1826,6 +1868,20 @@
       <p class="maybe reveal">Maybe you tasted a new version of yourself.</p>
       <p class="maybe reveal">Maybe you got really clear on something you can no longer unknow.</p>
       <p class="maybe turn reveal">You are no longer who you used to be, but you're not yet who you're becoming.</p>
+    </div>
+  </section>
+
+  <!-- ============ LETTER ============ -->
+  <section class="letter">
+    <div class="letter-inner reveal">
+      <p class="salutation">Dear One,</p>
+      <p>This is for you if you’re a woman who is done dimming her light, magic, wisdom and creativity, ready to step into the next version of you: the witch, artist, healer, queen, goddess...</p>
+      <p>You know her. You’ve felt her. You’ve embodied her before.</p>
+      <p>Then life happened. You got pulled back into an old version of you. A smaller version. It doesn’t fit you anymore.</p>
+      <p>And you’re feeling frustrated. Or excited. Maybe angry. Or numb. Or impatient. Or you simply can no longer wait.</p>
+      <p>You’re so ready to cross that threshold and turn your inner knowing into grounded choices and full expression in your life!</p>
+      <p class="signoff">XO</p>
+      <p class="signature">Simone &amp; Shawn</p>
     </div>
   </section>
 
@@ -2324,6 +2380,7 @@
 <footer>
   <span class="mark">Meaning ✦ Magic ✦ Momentum</span>
   <span>With Simone &amp; Shawn</span>
+  <p class="credit">Circles photo by <a href="https://unsplash.com/@robertlukeman?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Robert Lukeman</a> on <a href="https://unsplash.com/photos/green-grass-field-during-sunset-_RBcxo9AU-U?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 </footer>
 
 <script>
