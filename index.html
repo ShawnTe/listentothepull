@@ -372,7 +372,7 @@
     .sticker { width: 306px; }
   }
 
-  .band { padding: 72px 0; }
+  .band { padding: 56px 0; }
 
   .band-white { background: var(--base); }
   .band-cream { background: var(--cream); }
@@ -429,11 +429,150 @@
   }
 
   @media (min-width: 900px) {
-    .band { padding: 112px 0; }
+    .band { padding: 84px 0; }
   }
+
+  /* ---------- Watercolor & flow (echoes the chaos-to-clarity banner) ---------- */
+
+  body {
+    background-color: var(--cream);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .27 0 0 0 0 .3 0 0 0 0 .1 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+  .band { position: relative; overflow: hidden; }
+  .band > .wrap { position: relative; z-index: 1; }
+
+  .deco {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    height: auto;
+  }
+
+  /* Section headings: soft italic, not a label */
+  .eyebrow {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--coral);
+    margin: 0 0 22px;
+  }
+
+  /* Pull-quotes get a brushstroke underline */
+  .pull-quote {
+    width: fit-content;
+    font-size: 30px;
+    text-align: left;
+    margin: 36px 0 36px 28px;
+    padding-bottom: 14px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' preserveAspectRatio='none'%3E%3Cpath d='M4 12 C60 3 110 19 160 10 S252 5 296 11' fill='none' stroke='%23FFAE3F' stroke-width='5' stroke-linecap='round' opacity='.8'/%3E%3C/svg%3E") bottom / 100% 14px no-repeat;
+  }
+
+  /* The "Maybe..." lines: a quieter italic run */
+  .maybes { margin: 28px 0; }
+
+  .content .maybes p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.45;
+    margin: 0 0 12px;
+  }
+
+  /* Old Way: overlapping coral + olive suns, fully in frame */
+  .band-old .suns { width: 110px; top: 24px; right: 12px; opacity: 0.8; }
+
+  /* The Pull: a soft wash with wavy edges, like the signup band */
+  .band-pull {
+    padding: 104px 0;
+    background: linear-gradient(170deg, #FFEBD2 0%, #FFE4D6 60%, #FDEBDD 100%);
+    -webkit-mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C220 58 520 2 760 26 S1220 54 1440 20 V60 H0Z'/%3E%3C/svg%3E") top / 100% 60px no-repeat,
+      linear-gradient(#000, #000) center / 100% calc(100% - 118px) no-repeat,
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H1440 V28 C1200 58 940 6 700 30 S240 56 0 24Z'/%3E%3C/svg%3E") bottom / 100% 60px no-repeat;
+            mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C220 58 520 2 760 26 S1220 54 1440 20 V60 H0Z'/%3E%3C/svg%3E") top / 100% 60px no-repeat,
+      linear-gradient(#000, #000) center / 100% calc(100% - 118px) no-repeat,
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0 H1440 V28 C1200 58 940 6 700 30 S240 56 0 24Z'/%3E%3C/svg%3E") bottom / 100% 60px no-repeat;
+  }
+
+  .band-pull .sun-pair { width: 150px; top: 84px; right: -52px; opacity: 0.8; }
+  .band-pull .olive-dot { display: none; }
+
+  .band-invite .olive-sun { width: 200px; right: -110px; bottom: 40px; opacity: 0.6; }
+
+  /* A small cluster of paint circles between Invitation and About */
+  .cluster { display: block; width: 120px; margin: 0 auto 44px; }
+
+  .signup-jump { border-radius: 28px 18px 32px 22px; }
+
+  .about-photo {
+    width: 116px;
+    height: 116px;
+    box-shadow: 0 0 0 6px var(--cream), 14px 12px 0 6px rgba(255, 174, 63, 0.75);
+    margin-bottom: 32px;
+  }
+
+  /* Wavy top edge on the signup band */
+  .band-signup {
+    -webkit-mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 38 C240 0 480 60 720 28 S1200 2 1440 34 V60 H0Z'/%3E%3C/svg%3E") top / 100% 60px no-repeat,
+      linear-gradient(#000, #000) 0 59px / 100% calc(100% - 59px) no-repeat;
+            mask:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 38 C240 0 480 60 720 28 S1200 2 1440 34 V60 H0Z'/%3E%3C/svg%3E") top / 100% 60px no-repeat,
+      linear-gradient(#000, #000) 0 59px / 100% calc(100% - 59px) no-repeat;
+    padding-top: 92px;
+  }
+
+  @media (min-width: 900px) {
+    /* Break the two-column grid: let sections meander left and right */
+    .movement { display: block; margin: 0 0 48px; }
+    .eyebrow { font-size: 40px; margin: 0 0 30px; }
+    .movement-body { max-width: 600px; }
+    .band-pull .movement { padding-left: 120px; }
+
+    .pull-quote { font-size: 40px; margin: 44px 0 44px 88px; }
+
+    .band-old .suns { width: clamp(160px, calc(50vw - 380px), 300px); top: 96px; right: max(16px, calc(50% - 680px)); }
+
+    .band-pull { padding: 136px 0; }
+    .band-pull .sun-pair { width: 340px; top: 120px; right: calc(50% - 760px); }
+    .band-pull .olive-dot { display: block; width: 110px; left: calc(50% - 560px); bottom: 180px; opacity: 0.75; }
+
+    .band-invite .olive-sun { width: 280px; right: -60px; }
+
+    .about-photo { width: 140px; height: 140px; }
+  }
+
 </style>
 </head>
 <body>
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="watercolor" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="4" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="12" xChannelSelector="R" yChannelSelector="G" result="edge"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="9" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1 1.2" result="mottle"/>
+      <feComposite in="edge" in2="mottle" operator="in"/>
+    </filter>
+    <radialGradient id="wc-coral" cx="35%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#FFB49C"/><stop offset=".55" stop-color="#FF7656"/><stop offset="1" stop-color="#F0603F"/>
+    </radialGradient>
+    <radialGradient id="wc-amber" cx="40%" cy="35%" r="70%">
+      <stop offset="0" stop-color="#FFD9A0"/><stop offset=".6" stop-color="#FFAE3F"/><stop offset="1" stop-color="#F59A22"/>
+    </radialGradient>
+    <radialGradient id="wc-olive" cx="40%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#9AA265"/><stop offset="1" stop-color="#6B7536"/>
+    </radialGradient>
+  </defs>
+</svg>
 
 <header class="site-header">
   <div class="glow glow-a" aria-hidden="true"></div>
@@ -445,14 +584,18 @@
       <img class="sticker" src="images/sticker.png" alt="Sticker: F*ck the plan. Listen to the Pull .com">
     </div>
     <section class="content welcome reveal">
-    <p class="lede">Hello, beautiful soul.</p>
-    <p>If you're here, maybe you saw the sticker: &ldquo;F*ck the plan. Listen to the Pull&rdquo; and made you laugh, made you curious, or made you think: Yes. That.</p>
-    <p>So let's begin with a welcome.</p>
+    <p class="lede">Hi. Glad you found your way here.</p>
+    <p>Since you're here, maybe you saw the sticker: &ldquo;F*ck the plan. Listen to the Pull&rdquo; and it did something: made you laugh, made you curious, made you think, Yes. That.</p>
+    <p>So let's begin with a mini-manifesto so you know if we're on the same page.</p>
     </section>
   </div>
 </header>
 
-<div class="band band-white">
+<div class="band band-old">
+  <svg class="deco suns" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="245" cy="235" r="120" fill="url(#wc-olive)" filter="url(#watercolor)" opacity=".8"/>
+    <circle cx="165" cy="165" r="135" fill="url(#wc-coral)" filter="url(#watercolor)" opacity=".85"/>
+  </svg>
   <div class="wrap">
     <section class="content">
     <div class="movement">
@@ -461,18 +604,29 @@
         <p>I believe there is another way to navigate a life.</p>
         <p>We've been taught to know what we want, make a plan, set the goal, and go after it. To push through uncertainty. To keep moving. To be productive. To optimize. To figure it out.</p>
         <p>And sometimes that works.</p>
-        <p>But sometimes something inside you is saying, There's something else.</p>
+        <p>But somewhere in there, a lot of us also learned to override what we sense because we can't explain it yet. To second-guess a feeling because it isn't loud enough, certain enough, articulate enough to count. To demand proof before we're willing to take a single step. To treat not-knowing as a problem to be solved instead of a place worth exploring. To let fear dress itself up as &ldquo;being responsible&rdquo; and make the call for us.</p>
+        <p>That is not serving us.</p>
+        <p>Because sometimes something inside you is saying, There's something else.</p>
+        <div class="maybes">
         <p>Maybe you can feel a chapter coming to a close, but you have no idea what comes next.</p>
         <p>Maybe something feels off, but you can't quite articulate what.</p>
         <p>Maybe you're curious about something that makes absolutely no sense on paper.</p>
         <p>Maybe something simply feels right.</p>
+        </div>
       </div>
     </div>
     </section>
   </div>
 </div>
 
-<div class="band band-olive">
+<div class="band band-pull">
+  <svg class="deco sun-pair" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="220" cy="175" r="150" fill="url(#wc-amber)" filter="url(#watercolor)" opacity=".9"/>
+    <circle cx="110" cy="300" r="62" fill="url(#wc-coral)" filter="url(#watercolor)" opacity=".8"/>
+  </svg>
+  <svg class="deco olive-dot" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="80" fill="url(#wc-olive)" filter="url(#watercolor)"/>
+  </svg>
   <div class="wrap">
     <section class="content">
     <div class="movement">
@@ -483,29 +637,29 @@
         <p class="pull-quote">I call it the Pull.</p>
         <p>The Pull might feel like curiosity. A spark. A nudge. A sense of aliveness. A quiet knowing. Sometimes it's a restlessness. Sometimes it's a persistent feeling that something is changing.</p>
         <p>It doesn't tell you what to do. It asks you to pay attention — to listen, explore, experiment, and let your experience teach you something you couldn't have known from the beginning.</p>
-        <p>It's about developing a deeper relationship with your own Knowing — one that doesn't ask you to throw out your plans, go passive, or wait for the universe to hand you an answer.</p>
+        <p>That's the practice: learning when to move, when to wait, when to investigate, when to let something go — and catching yourself in the moment you're demanding certainty just because uncertainty feels uncomfortable.</p>
+        <p>It's about developing a deeper relationship with your sense of Knowing — where discernment holds the reins and your mind is in service of your Knowing instead of drowning it out.</p>
+        <p>Listening, experimenting, paying attention, and trusting that you can navigate life one step at a time, finding the path as you walk it.</p>
+        <p>And when fear gets loud, or you lose touch with what you know?</p>
+        <p class="pull-quote">You can find your way back.</p>
+        <p>That's part (a really big part!) of the practice, too.</p>
+        <p>It's about whatever you need to dance to the beat of your own drummer. To bring on the dance moves that only you can do. To honor the song that only you can sing.</p>
       </div>
     </div>
     </section>
   </div>
 </div>
 
-<div class="band band-cream">
+<div class="band band-invite">
+  <svg class="deco olive-sun" viewBox="0 0 400 400" aria-hidden="true">
+    <circle cx="200" cy="200" r="160" fill="url(#wc-olive)" filter="url(#watercolor)" opacity=".75"/>
+  </svg>
   <div class="wrap">
     <section class="content">
     <div class="movement">
-      <h2 class="eyebrow">The Practice</h2>
-      <div class="movement-body">
-        <p>So that you can recognize when to move, when to wait, when to investigate, when to let something go — and when you're trying to force certainty because uncertainty makes you uncomfortable.</p>
-        <p>Maybe you can learn to navigate your life sourced from within, without needing to have all the answers.</p>
-        <p>That's what I'm exploring here.</p>
-      </div>
-    </div>
-
-    <div class="movement">
       <h2 class="eyebrow">The Invitation</h2>
       <div class="movement-body">
-        <p>And I'd love to have you along on the journey.</p>
+        <p>I'd love to continue on this journey with you.</p>
         <p>Sign up and I'll send you the Push vs. Pull Compass to help deepen your sense of which one's driving.</p>
         <p>Welcome.</p>
         <p>Let's see where the Pull takes us.</p>
@@ -521,8 +675,13 @@
   </div>
 </div>
 
-<div class="band band-white">
+<div class="band band-about">
   <div class="wrap">
+    <svg class="cluster" viewBox="0 0 240 120" aria-hidden="true">
+      <circle cx="96" cy="62" r="46" fill="url(#wc-amber)" filter="url(#watercolor)" opacity=".9"/>
+      <circle cx="150" cy="72" r="30" fill="url(#wc-coral)" filter="url(#watercolor)" opacity=".85"/>
+      <circle cx="56" cy="88" r="17" fill="url(#wc-olive)" filter="url(#watercolor)" opacity=".85"/>
+    </svg>
     <section class="content about reveal">
     <div class="about-photo">
       <img src="images/shawn-in-nature.jpg" alt="Shawn">
