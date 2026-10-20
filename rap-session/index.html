@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The RAP Session</title>
+  <meta name="description" content="A weekly Review, Alignment & Planning Session to start your week clear, grounded, and led by your highest self." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Permanent+Marker&family=Special+Elite&display=swap" rel="stylesheet" />
+  <style>
+
+/* ─────────────────────────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────────────────────────── */
+:root {
+  --paper:    #F3EDE0;
+  --paper-2:  #E9E0CC;
+  --ink:      #151312;
+  --ink-mid:  #3B3633;
+  --tomato:   #FF4A1C;
+  --yellow:   #FFE14D;
+  --blue:     #2F4BFF;
+  --white:    #FFFDF8;
+
+  --line:     3px solid var(--ink);
+  --shadow:   6px 6px 0 var(--ink);
+  --shadow-s: 4px 4px 0 var(--ink);
+
+  --nav-h:    64px;
+  --max:      760px;
+  --max-wide: 1080px;
+  --gutter:   clamp(16px, 5vw, 40px);
+  --gap:      clamp(64px, 9vw, 120px);
+
+  --f-display: 'Anton', 'Impact', sans-serif;
+  --f-body:    'Archivo', system-ui, sans-serif;
+  --f-marker:  'Permanent Marker', cursive;
+  --f-type:    'Special Elite', 'Courier New', monospace;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE
+───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  font-family: var(--f-body);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* paper grain over everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 0.005em;
+}
+h2 { font-size: clamp(2.6rem, 7vw, 4.8rem); margin-bottom: 28px; }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+p { margin-bottom: 1em; max-width: 60ch; }
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 800; }
+
+.wrap      { max-width: var(--max);      margin: 0 auto; padding: 0 var(--gutter); }
+.wrap-wide { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--gutter); }
+section    { padding: var(--gap) 0; position: relative; }
+
+/* marker scribbles + highlighter */
+.scribble {
+  font-family: var(--f-marker);
+  color: var(--tomato);
+  font-size: 1.15rem;
+  display: inline-block;
+  transform: rotate(-3deg);
+}
+.hl {
+  background: linear-gradient(transparent 55%, var(--yellow) 55%, var(--yellow) 92%, transparent 92%);
+  padding: 0 0.1em;
+}
+.circled {
+  position: relative;
+  white-space: nowrap;
+}
+.circled::after {
+  content: '';
+  position: absolute;
+  inset: -0.18em -0.35em;
+  border: 3px solid var(--tomato);
+  border-radius: 50% 45% 55% 48% / 55% 48% 52% 45%;
+  transform: rotate(-2deg);
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BUTTON
+───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 30px;
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  background: var(--yellow);
+  border: var(--line);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:hover  { transform: translate(-2px, -2px) rotate(-1deg); box-shadow: 8px 8px 0 var(--ink); }
+.btn:active { transform: translate(6px, 6px); box-shadow: 0 0 0 var(--ink); }
+.btn:focus-visible { outline: 3px dashed var(--blue); outline-offset: 6px; }
+.btn-tomato { background: var(--tomato); color: var(--white); }
+.btn-small  { font-size: 1rem; padding: 9px 18px; box-shadow: var(--shadow-s); }
+
+/* ─────────────────────────────────────────────────────────────
+   STICKERS
+───────────────────────────────────────────────────────────── */
+.sticker {
+  display: inline-block;
+  padding: 8px 16px;
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  background: var(--white);
+  border: var(--line);
+  box-shadow: var(--shadow-s);
+  transform: rotate(var(--r, -4deg));
+  transition: transform 0.25s cubic-bezier(.3,1.6,.5,1);
+}
+.sticker:hover { transform: rotate(calc(var(--r, -4deg) * -1)) scale(1.06); }
+.sticker-yellow { background: var(--yellow); }
+.sticker-tomato { background: var(--tomato); color: var(--white); }
+.sticker-blue   { background: var(--blue);   color: var(--white); }
+.sticker-round {
+  width: 128px; height: 128px;
+  border-radius: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  background: var(--paper);
+  border-bottom: var(--line);
+}
+.nav-inner {
+  max-width: var(--max-wide);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav-logo {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.nav-logo span { color: var(--tomato); }
+.nav-right { display: flex; align-items: center; gap: 22px; }
+.nav-link {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--ink);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.nav-link:hover { color: var(--tomato); }
+@media (max-width: 560px) {
+  .nav-link { display: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────────────────────── */
+.hero {
+  padding-top: calc(var(--nav-h) + clamp(40px, 7vw, 80px));
+  padding-bottom: clamp(56px, 8vw, 96px);
+  background:
+    radial-gradient(circle, rgba(21,19,18,0.13) 1.2px, transparent 1.6px) 0 0 / 14px 14px,
+    var(--paper);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+.hero-kicker {
+  font-family: var(--f-type);
+  font-size: 1rem;
+  margin-bottom: 18px;
+}
+.hero-title { margin-bottom: 28px; }
+.hero-the {
+  display: block;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  margin-bottom: 4px;
+}
+.rap {
+  display: flex;
+  gap: clamp(6px, 1.5vw, 14px);
+  margin-bottom: 6px;
+}
+.rap-letter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.rap-letter b {
+  font-weight: 400;
+  font-size: clamp(5.5rem, 17vw, 11rem);
+  line-height: 0.85;
+  padding: 0.04em 0.12em 0;
+  border: var(--line);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+.rap-letter:nth-child(1) b { background: var(--tomato); color: var(--white); transform: rotate(-3deg); }
+.rap-letter:nth-child(2) b { background: var(--yellow); transform: rotate(2deg); }
+.rap-letter:nth-child(3) b { background: var(--blue);   color: var(--white); transform: rotate(-1.5deg); }
+.rap-letter small {
+  font-family: var(--f-marker);
+  text-transform: none;
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  margin-top: 12px;
+  letter-spacing: 0;
+}
+.hero-session {
+  display: block;
+  font-size: clamp(3rem, 10vw, 6.4rem);
+  margin-top: 6px;
+}
+.hero-tagline {
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  max-width: 26ch;
+}
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--ink-mid);
+  margin-bottom: 34px;
+  max-width: 44ch;
+}
+.hero-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 26px; }
+
+.hero-art {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  max-width: 440px;
+  width: 100%;
+  justify-self: center;
+}
+.hero-art svg { width: 100%; height: 100%; display: block; }
+.hero-art .sticker { position: absolute; }
+.hero-art .s1 { top: 2%;  right: -2%; --r: 8deg; }
+.hero-art .s2 { bottom: 4%; left: -4%; --r: -7deg; }
+
+/* steam + drip animation on the mug */
+.steam path { animation: steam 3.2s ease-in-out infinite; }
+.steam path:nth-child(2) { animation-delay: 0.6s; }
+.steam path:nth-child(3) { animation-delay: 1.2s; }
+@keyframes steam {
+  0%, 100% { transform: translateY(0);   opacity: 1; }
+  50%      { transform: translateY(-8px); opacity: 0.45; }
+}
+.drop { animation: bob 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.drop:nth-of-type(2) { animation-delay: 0.4s; }
+.drop:nth-of-type(3) { animation-delay: 0.9s; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50%      { transform: translateY(-6px) rotate(8deg); }
+}
+
+@media (max-width: 820px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-art  { max-width: 340px; margin-top: 20px; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MARQUEE
+───────────────────────────────────────────────────────────── */
+.marquee {
+  background: var(--ink);
+  color: var(--yellow);
+  border-top: var(--line);
+  border-bottom: var(--line);
+  overflow: hidden;
+  padding: 14px 0;
+  transform: rotate(-1.2deg);
+  margin: 0 -20px;
+  position: relative;
+  z-index: 5;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee span {
+  font-family: var(--f-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-right: 0.6em;
+  white-space: nowrap;
+}
+.marquee span i { font-style: normal; color: var(--tomato); padding: 0 0.3em; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ─────────────────────────────────────────────────────────────
+   MESS — lines start jumbled, snap into order
+───────────────────────────────────────────────────────────── */
+.mess { padding-top: calc(var(--gap) + 20px); }
+.mess-list { list-style: none; margin: 8px 0 48px; display: grid; gap: 12px; }
+.mess-line {
+  font-family: var(--f-type);
+  font-size: clamp(1.02rem, 2.2vw, 1.2rem);
+  background: var(--white);
+  border: 2px solid var(--ink);
+  padding: 12px 18px;
+  max-width: 34em;
+  transition: transform 0.7s cubic-bezier(.3,1.4,.5,1), box-shadow 0.7s ease;
+  box-shadow: var(--shadow-s);
+}
+.mess-line:nth-child(1) { transform: rotate(-4deg) translateX(14%); }
+.mess-line:nth-child(2) { transform: rotate(3deg)  translateX(-4%); }
+.mess-line:nth-child(3) { transform: rotate(-2deg) translateX(22%); }
+.mess-line:nth-child(4) { transform: rotate(2.5deg) translateX(6%); }
+.mess-list.is-sorted .mess-line { transform: none; }
+.mess-list.is-sorted .mess-line:nth-child(2) { transition-delay: 0.08s; }
+.mess-list.is-sorted .mess-line:nth-child(3) { transition-delay: 0.16s; }
+.mess-list.is-sorted .mess-line:nth-child(4) { transition-delay: 0.24s; }
+@media (max-width: 600px) {
+  .mess-line:nth-child(n) { transform: rotate(-2deg); }
+  .mess-line:nth-child(even) { transform: rotate(2deg); }
+}
+
+.mess-body { font-size: 1.12rem; }
+.mess-body p:first-child { font-weight: 800; font-size: 1.3rem; }
+
+.slab {
+  margin-top: 48px;
+  background: var(--ink);
+  color: var(--white);
+  padding: clamp(28px, 5vw, 48px);
+  border: var(--line);
+  box-shadow: 10px 10px 0 var(--tomato);
+  transform: rotate(-0.8deg);
+}
+.slab p {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  line-height: 1.05;
+  max-width: none;
+}
+.slab p + p { color: var(--yellow); margin-top: 14px; }
+
+/* ─────────────────────────────────────────────────────────────
+   WHAT IF — checklist cards
+───────────────────────────────────────────────────────────── */
+.whatif { background: var(--yellow); border-top: var(--line); border-bottom: var(--line); }
+.whatif .lead { font-size: 1.15rem; margin-bottom: 36px; }
+.list-label {
+  font-family: var(--f-marker);
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+}
+.check-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.check-grid li {
+  background: var(--white);
+  border: var(--line);
+  box-shadow: var(--shadow-s);
+  padding: 18px 18px 18px 56px;
+  font-weight: 700;
+  line-height: 1.35;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+.check-grid li:nth-child(odd)  { transform: rotate(-1deg); }
+.check-grid li:nth-child(even) { transform: rotate(1deg); }
+.check-grid li:hover { transform: rotate(0) scale(1.03); }
+.check-grid li::before {
+  content: '';
+  position: absolute;
+  left: 16px; top: 18px;
+  width: 24px; height: 24px;
+  border: 3px solid var(--ink);
+  background: var(--white);
+}
+.check-grid li::after {
+  content: '✓';
+  position: absolute;
+  left: 18px; top: 6px;
+  font-family: var(--f-marker);
+  font-size: 1.9rem;
+  color: var(--tomato);
+}
+.big-turn { font-size: 1.15rem; }
+.big-turn .em {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+  line-height: 1.02;
+  max-width: 20em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FOR YOU
+───────────────────────────────────────────────────────────── */
+.for-you-body p { font-size: 1.1rem; }
+.for-you-body p:first-child { font-weight: 800; font-size: 1.3rem; }
+.want-list { list-style: none; margin: 18px 0 44px; }
+.want-list li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 2px dashed rgba(21,19,18,0.35);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.want-list li::before {
+  content: '✦';
+  color: var(--tomato);
+  font-size: 1.3rem;
+}
+.callout-line {
+  font-size: 1.1rem;
+  padding: 22px 24px;
+  border: var(--line);
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SETLIST — the 5 steps
+───────────────────────────────────────────────────────────── */
+.setlist {
+  background: var(--ink);
+  color: var(--white);
+}
+.setlist h2 { color: var(--white); }
+.setlist h2 .scribble { color: var(--yellow); font-size: 0.4em; vertical-align: middle; margin-left: 8px; }
+.setlist .lead { color: rgba(255,253,248,0.78); font-size: 1.1rem; margin-bottom: 40px; }
+.tracks { list-style: none; display: grid; gap: 18px; }
+.track {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--line);
+  border-color: var(--paper);
+  position: relative;
+}
+.track:nth-child(odd)  { transform: rotate(-0.6deg); }
+.track:nth-child(even) { transform: rotate(0.6deg); }
+.track-num {
+  font-family: var(--f-display);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  line-height: 1;
+  padding: 18px clamp(14px, 3vw, 26px);
+  background: var(--tomato);
+  color: var(--white);
+  border-right: 3px dashed var(--ink);
+  display: flex;
+  align-items: center;
+}
+.track:nth-child(2) .track-num { background: var(--yellow); color: var(--ink); }
+.track:nth-child(3) .track-num { background: var(--blue); }
+.track:nth-child(4) .track-num { background: var(--yellow); color: var(--ink); }
+.track-body { padding: 18px clamp(16px, 3vw, 26px); }
+.track-body h3 { margin-bottom: 6px; }
+.track-body p  { color: var(--ink-mid); margin: 0; max-width: none; }
+
+/* ─────────────────────────────────────────────────────────────
+   DEEPER INVITATION
+───────────────────────────────────────────────────────────── */
+.invite p { font-size: 1.15rem; }
+.invite .opener { font-weight: 800; font-size: 1.4rem; }
+.stack { margin: 22px 0 26px; }
+.stack p {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+  line-height: 1.1;
+  margin-bottom: 0.25em;
+  max-width: none;
+}
+.stack-grow p:nth-child(1) { font-size: clamp(1.3rem, 3vw, 1.8rem); opacity: 0.55; }
+.stack-grow p:nth-child(2) { font-size: clamp(1.6rem, 3.8vw, 2.3rem); opacity: 0.75; }
+.stack-grow p:nth-child(3) { font-size: clamp(1.9rem, 4.6vw, 2.8rem); }
+.invite .now {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(7rem, 26vw, 15rem);
+  line-height: 0.85;
+  color: var(--tomato);
+  -webkit-text-stroke: 3px var(--ink);
+  text-shadow: 8px 8px 0 var(--ink);
+  margin: 10px 0 36px;
+  display: inline-block;
+  transform: rotate(-4deg);
+}
+.invite .closer { font-weight: 800; font-size: 1.35rem; }
+
+/* ─────────────────────────────────────────────────────────────
+   RESULT
+───────────────────────────────────────────────────────────── */
+.result { background: var(--blue); color: var(--white); border-top: var(--line); border-bottom: var(--line); }
+.result h2 { color: var(--white); }
+.result .lead { font-size: 1.2rem; margin-bottom: 30px; }
+.know-list { list-style: none; display: grid; gap: 12px; margin-bottom: 40px; }
+.know-list li {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  line-height: 1.05;
+}
+.know-list li::before {
+  content: '✓ ';
+  font-family: var(--f-marker);
+  color: var(--yellow);
+}
+.result .slab { box-shadow: 10px 10px 0 var(--yellow); transform: rotate(0.8deg); }
+
+/* ─────────────────────────────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────────────────────────────── */
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+.quote {
+  background: var(--white);
+  border: var(--line);
+  box-shadow: var(--shadow);
+  padding: 34px 28px 26px;
+  position: relative;
+}
+.quote:nth-child(1) { transform: rotate(-1.5deg); }
+.quote:nth-child(2) { transform: rotate(1.2deg); }
+.quote::before {          /* tape */
+  content: '';
+  position: absolute;
+  top: -14px; left: 50%;
+  width: 110px; height: 28px;
+  background: rgba(255,225,77,0.85);
+  border: 1px solid rgba(21,19,18,0.2);
+  transform: translateX(-50%) rotate(-3deg);
+}
+.quote blockquote { font-size: 1.15rem; font-weight: 500; margin-bottom: 18px; }
+.quote blockquote::before {
+  content: '“';
+  display: block;
+  font-family: var(--f-display);
+  font-size: 4rem;
+  line-height: 0.6;
+  color: var(--tomato);
+  margin-bottom: 6px;
+}
+.quote cite { font-family: var(--f-type); font-style: normal; font-size: 0.95rem; }
+.is-placeholder { outline: 3px dashed var(--tomato); outline-offset: 6px; }
+
+/* ─────────────────────────────────────────────────────────────
+   DETAILS — ticket
+───────────────────────────────────────────────────────────── */
+.details { background: var(--paper-2); border-top: var(--line); }
+.ticket {
+  background: var(--white);
+  border: var(--line);
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.ticket-cell {
+  padding: 22px 24px;
+  border-bottom: 2px dashed var(--ink);
+}
+.ticket-cell:nth-child(odd) { border-right: 2px dashed var(--ink); }
+.ticket-label {
+  font-family: var(--f-type);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-mid);
+  margin-bottom: 6px;
+}
+.ticket-value {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  line-height: 1.05;
+}
+.ticket-wide { grid-column: 1 / -1; border-right: none !important; border-bottom: none; }
+.ticket-wide p { max-width: none; font-size: 1.05rem; }
+
+.price-cell { position: relative; background: var(--yellow); }
+.price {
+  font-family: var(--f-display);
+  font-size: clamp(3.4rem, 9vw, 5rem);
+  line-height: 0.9;
+}
+.price s {
+  font-size: 0.5em;
+  opacity: 0.55;
+  text-decoration-thickness: 4px;
+  text-decoration-color: var(--tomato);
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.price small { font-size: 0.35em; font-family: var(--f-body); font-weight: 700; }
+.founders {
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  max-width: none;
+}
+.price-cell .sticker { position: absolute; top: -18px; right: -10px; --r: 9deg; font-size: 0.9rem; }
+
+@media (max-width: 600px) {
+  .ticket { grid-template-columns: 1fr; }
+  .ticket-cell:nth-child(odd) { border-right: none; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SHAWN
+───────────────────────────────────────────────────────────── */
+.shawn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+.shawn-body p { font-size: 1.1rem; }
+.scribble-inline { font-family: var(--f-marker); font-style: normal; color: var(--tomato); font-size: 1.1em; }
+.shawn-sig { font-family: var(--f-marker); font-size: 2rem; color: var(--tomato); display: inline-block; margin-top: 18px; transform: rotate(-4deg); }
+.polaroid {
+  background: var(--white);
+  border: var(--line);
+  box-shadow: var(--shadow);
+  padding: 14px 14px 52px;
+  transform: rotate(3deg);
+  position: relative;
+  max-width: 480px;
+  justify-self: center;
+}
+.polaroid img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 66% 40%; border: 2px solid var(--ink); filter: contrast(1.08) saturate(1.05); }
+.polaroid figcaption {
+  position: absolute;
+  bottom: 12px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--f-marker);
+  font-size: 1.25rem;
+}
+.polaroid::before, .polaroid::after {   /* tape corners */
+  content: '';
+  position: absolute;
+  width: 80px; height: 24px;
+  background: rgba(255,225,77,0.85);
+  border: 1px solid rgba(21,19,18,0.2);
+}
+.polaroid::before { top: -10px; left: -22px; transform: rotate(-35deg); }
+.polaroid::after  { top: -10px; right: -22px; transform: rotate(35deg); }
+@media (max-width: 760px) {
+  .shawn-grid { grid-template-columns: 1fr; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   FAQ
+───────────────────────────────────────────────────────────── */
+.faq { background: var(--paper-2); border-top: var(--line); }
+.faq-list { display: grid; gap: 14px; }
+.faq-item {
+  background: var(--white);
+  border: var(--line);
+  box-shadow: var(--shadow-s);
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 56px 18px 22px;
+  font-weight: 800;
+  font-size: 1.12rem;
+  position: relative;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 20px; top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--f-display);
+  font-size: 2rem;
+  color: var(--tomato);
+  transition: transform 0.2s ease;
+}
+.faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq-item summary:focus-visible { outline: 3px dashed var(--blue); outline-offset: 4px; }
+.faq-item .answer { padding: 0 22px 20px; }
+.faq-item .answer p { max-width: none; }
+
+/* ─────────────────────────────────────────────────────────────
+   FINAL CTA — poster
+───────────────────────────────────────────────────────────── */
+.poster {
+  background: var(--tomato);
+  color: var(--white);
+  border-top: var(--line);
+  text-align: center;
+  overflow: hidden;
+}
+.poster::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(21,19,18,0.18) 1.4px, transparent 1.8px) 0 0 / 16px 16px;
+  pointer-events: none;
+}
+.poster .wrap { position: relative; }
+.poster h2 { font-size: clamp(3rem, 10vw, 6.4rem); color: var(--white); -webkit-text-stroke: 2px var(--ink); text-shadow: 6px 6px 0 var(--ink); }
+.poster-sub { font-size: 1.15rem; font-weight: 500; margin: 0 auto 36px; max-width: 46ch; }
+.come { margin-bottom: 44px; }
+.come p {
+  font-family: var(--f-display);
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 4.4vw, 2.6rem);
+  line-height: 1.05;
+  margin: 0 auto 0.2em;
+  max-width: none;
+}
+.come p:nth-child(2) { color: var(--yellow); }
+.poster-note {
+  display: block;
+  margin-top: 26px;
+  font-family: var(--f-type);
+  font-size: 0.98rem;
+}
+
+footer {
+  background: var(--ink);
+  color: rgba(255,253,248,0.65);
+  text-align: center;
+  padding: 28px var(--gutter);
+  font-size: 0.9rem;
+}
+footer strong { color: var(--yellow); font-family: var(--f-display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ─────────────────────────────────────────────────────────────
+   REVEAL
+───────────────────────────────────────────────────────────── */
+.js .reveal { opacity: 0; translate: 0 26px; transition: opacity 0.55s ease, translate 0.55s cubic-bezier(.3,1.4,.5,1); }
+.js .reveal.is-visible { opacity: 1; translate: 0 0; }
+
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────────────── -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">The <span>RAP</span> Session</a>
+    <div class="nav-right">
+      <a href="#how-it-works" class="nav-link">How it works</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#join" class="btn btn-small">Join</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ── HERO ─────────────────────────────────────────────────────── -->
+<section id="home" class="hero" aria-labelledby="hero-h1">
+  <div class="wrap-wide hero-grid">
+    <div>
+      <p class="hero-kicker">// Mondays &middot; 10am Pacific &middot; live</p>
+      <h1 id="hero-h1" class="hero-title">
+        <span class="hero-the">The</span>
+        <span class="rap" aria-label="RAP">
+          <span class="rap-letter"><b>R</b><small>review</small></span>
+          <span class="rap-letter"><b>A</b><small>alignment</small></span>
+          <span class="rap-letter"><b>P</b><small>planning</small></span>
+        </span>
+        <span class="hero-session">Session</span>
+      </h1>
+      <p class="hero-tagline">Weekly review, alignment, and planning for your life and work.</p>
+      <p class="hero-sub">A weekly Review, Alignment &amp; Planning Session to start your week clear, grounded, and led by your highest self.</p>
+      <div class="hero-cta-row">
+        <a href="https://buy.stripe.com/3cIfZhbuF0a93Nr2kn5Rm03" class="btn btn-tomato" target="_blank" rel="noopener">
+          Join The RAP Session
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></svg>
+        </a>
+        <span class="scribble">first 10 get founders pricing &rarr;</span>
+      </div>
+    </div>
+
+    <!-- PLACEHOLDER ART: swap this SVG for Shawn's illustrated mug -->
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 400 400" fill="none" stroke="#151312" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+        <g class="steam" stroke-width="5">
+          <path d="M150 112c-14-18 14-30 0-50"/>
+          <path d="M195 104c-14-18 14-30 0-50"/>
+          <path d="M240 112c-14-18 14-30 0-50"/>
+        </g>
+        <!-- splash drops -->
+        <path class="drop" d="M96 132c-10 14-8 26 2 28s16-10 6-28l-4-8z" fill="#FF4A1C"/>
+        <path class="drop" d="M300 116c-8 11-6 21 2 22s13-8 5-22l-3-6z" fill="#FF4A1C"/>
+        <path class="drop" d="M322 182c-6 8-5 15 1 16s10-6 4-16l-2-5z" fill="#FF4A1C"/>
+        <!-- mug -->
+        <path d="M262 190h26c26 0 38 18 38 38s-14 40-40 40h-30" fill="#FFFDF8" stroke-width="7"/>
+        <path d="M262 214h22c10 0 16 6 16 14s-6 16-16 16h-24" fill="#F3EDE0"/>
+        <path d="M108 150h164l-12 172c-2 18-16 30-34 30h-72c-18 0-32-12-34-30z" fill="#FFE14D" stroke-width="7"/>
+        <ellipse cx="190" cy="150" rx="82" ry="14" fill="#151312"/>
+        <path d="M120 152c22-16 60-8 70 0s50 12 72-2" stroke="#FF4A1C" stroke-width="5"/>
+        <!-- RAP on the mug -->
+        <text x="190" y="268" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="66" fill="#151312" stroke="none" transform="rotate(-6 190 250)">RAP</text>
+        <path d="M134 296c30 8 82 8 112-2" stroke-width="5"/>
+        <!-- sparkle -->
+        <path d="M60 250l8-18 8 18 18 8-18 8-8 18-8-18-18-8z" fill="#2F4BFF" stroke-width="4"/>
+        <path d="M338 300l5-11 5 11 11 5-11 5-5 11-5-11-11-5z" fill="#FFE14D" stroke-width="4"/>
+      </svg>
+      <span class="sticker sticker-yellow sticker-round s1"><span>$67</span><span style="font-size:.7em">/mo founders</span></span>
+      <span class="sticker sticker-blue s2">Mondays don&rsquo;t have to suck</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ───────────────────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Review<i>✦</i>Align<i>✦</i>Plan<i>✦</i>Repeat<i>✦</i>Review<i>✦</i>Align<i>✦</i>Plan<i>✦</i>Repeat<i>✦</i></span>
+    <span>Review<i>✦</i>Align<i>✦</i>Plan<i>✦</i>Repeat<i>✦</i>Review<i>✦</i>Align<i>✦</i>Plan<i>✦</i>Repeat<i>✦</i></span>
+  </div>
+</div>
+
+<!-- ── MESS ──────────────────────────────────────────────────────── -->
+<section id="why" class="mess" aria-labelledby="mess-h2">
+  <div class="wrap">
+    <h2 id="mess-h2" class="reveal">Monday mornings can feel like a <span class="circled">mess.</span></h2>
+    <ul class="mess-list" id="mess-list" role="list">
+      <li class="mess-line">You&rsquo;re coming out of the weekend.</li>
+      <li class="mess-line">You&rsquo;re trying to remember where you left off last week.</li>
+      <li class="mess-line">You&rsquo;re wondering if you&rsquo;re forgetting something important.</li>
+      <li class="mess-line">Your calendar is full, your brain is scattered, and before you know it, the week starts running you instead of the other way around.</li>
+    </ul>
+    <div class="mess-body">
+      <p class="reveal">The RAP Session is a weekly guided space to pause, orient, and begin again.</p>
+      <p class="reveal">This is where you step out of the daily busyness, reconnect with what matters to you, and let your best self take <span class="hl">the seat at the head of the table.</span></p>
+    </div>
+    <div class="slab reveal">
+      <p>Because planning your week isn&rsquo;t just about getting organized.</p>
+      <p>It&rsquo;s about remembering who is meant to be at the helm of your life.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT IF ───────────────────────────────────────────────────── -->
+<section class="whatif" aria-labelledby="whatif-h2">
+  <div class="wrap">
+    <h2 id="whatif-h2" class="reveal">What if Monday morning became the moment you came back to yourself?</h2>
+    <p class="lead reveal">Inside The RAP Session, you&rsquo;ll be guided to review and plan your week in a way that honors both your outer commitments and your inner world.</p>
+    <p class="list-label reveal">Together, we&rsquo;ll look at things like:</p>
+    <ul class="check-grid" role="list">
+      <li class="reveal">What&rsquo;s important this week</li>
+      <li class="reveal">What commitments, projects, or dates need your attention</li>
+      <li class="reveal">What you may have forgotten or left open from last week</li>
+      <li class="reveal">What you want to make progress on</li>
+      <li class="reveal">What needs care, clarity, or completion</li>
+      <li class="reveal">Who you want to be as you move through the week</li>
+    </ul>
+    <p class="big-turn reveal">
+      But the real power of this space isn&rsquo;t just &ldquo;level setting.&rdquo;
+      <span class="em">The real shift is dropping into yourself and letting your highest self get back in the driver&rsquo;s seat.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ── FOR YOU ───────────────────────────────────────────────────── -->
+<section id="for-you" class="for-you" aria-labelledby="foryou-h2">
+  <div class="wrap">
+    <h2 id="foryou-h2" class="reveal">This is for you if&hellip;</h2>
+    <div class="for-you-body">
+      <p class="reveal">You have things you care about, but they keep getting swallowed by the day-to-day.</p>
+      <p class="reveal">You may be working on a personal project, a creative idea, an art project, a business, a transition, or simply wanting to feel more intentional with your time.</p>
+      <p class="reveal">You don&rsquo;t need to have a specific project or program you&rsquo;re working through.</p>
+      <p class="reveal">You just need a desire to <span class="hl">stop letting the weeks blur by</span> without making progress on what matters to you.</p>
+    </div>
+    <p class="list-label reveal" style="margin-top:36px">This is for you if you want:</p>
+    <ul class="want-list" role="list">
+      <li class="reveal">A dedicated weekly space to reconnect with yourself</li>
+      <li class="reveal">A calmer, clearer start to the week</li>
+      <li class="reveal">Support around what matters internally and externally</li>
+      <li class="reveal">More peace of mind knowing the important things are covered</li>
+      <li class="reveal">A rhythm that helps you stay connected to the big picture</li>
+      <li class="reveal">A supportive group space where you&rsquo;re not doing it all alone</li>
+    </ul>
+    <p class="callout-line reveal">Whether you&rsquo;re self-employed, employed with a flexible schedule, navigating a creative season, or simply craving a more intentional rhythm, The RAP Session gives you a place to come back to yourself every week.</p>
+  </div>
+</section>
+
+<!-- ── SETLIST ───────────────────────────────────────────────────── -->
+<section id="how-it-works" class="setlist" aria-labelledby="setlist-h2">
+  <div class="wrap">
+    <h2 id="setlist-h2" class="reveal">What happens inside each session? <span class="scribble">the setlist</span></h2>
+    <p class="lead reveal">Each week, we gather for a guided Review, Alignment &amp; Planning Session designed to help you start the week with clarity and presence. You&rsquo;ll be guided through a process to:</p>
+    <ol class="tracks" role="list">
+      <li class="track reveal">
+        <span class="track-num">01</span>
+        <div class="track-body">
+          <h3>Arrive and settle</h3>
+          <p>We begin by creating a little space between you and the noise of the week.</p>
+        </div>
+      </li>
+      <li class="track reveal">
+        <span class="track-num">02</span>
+        <div class="track-body">
+          <h3>Reconnect with yourself</h3>
+          <p>Through a simple guided visualization, you&rsquo;ll connect with your best self &mdash; the part of you that knows what matters, what&rsquo;s next, and how you want to move.</p>
+        </div>
+      </li>
+      <li class="track reveal">
+        <span class="track-num">03</span>
+        <div class="track-body">
+          <h3>Review what&rsquo;s important</h3>
+          <p>We&rsquo;ll orient around your current projects, priorities, commitments, dates, and open loops.</p>
+        </div>
+      </li>
+      <li class="track reveal">
+        <span class="track-num">04</span>
+        <div class="track-body">
+          <h3>Plan from alignment</h3>
+          <p>Rather than forcing yourself into a rigid productivity plan, you&rsquo;ll choose what deserves your attention from a grounded, intentional place.</p>
+        </div>
+      </li>
+      <li class="track reveal">
+        <span class="track-num">05</span>
+        <div class="track-body">
+          <h3>Leave with peace of mind</h3>
+          <p>You&rsquo;ll begin the week knowing you&rsquo;ve looked at the important stuff &mdash; and you&rsquo;re moving forward with yourself, not against yourself.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── DEEPER INVITATION ─────────────────────────────────────────── -->
+<section class="invite" aria-labelledby="invite-h2">
+  <div class="wrap">
+    <h2 id="invite-h2" class="reveal">The deeper invitation</h2>
+    <p class="opener reveal">The RAP Session is an invitation to stop abandoning the bigger picture.</p>
+    <div class="stack reveal">
+      <p>It&rsquo;s a reminder to come out of the weeds.</p>
+      <p>To stop letting the year go by without making progress on what matters.</p>
+      <p>To stop letting the urgent crowd out the meaningful.</p>
+    </div>
+    <p class="reveal">Week by week, you&rsquo;ll practice putting your highest self back at the head of the table.</p>
+    <div class="stack stack-grow reveal">
+      <p>Not someday.</p>
+      <p>Not when life gets less busy.</p>
+      <p>Not when everything is perfectly clear.</p>
+    </div>
+    <p class="now reveal">Now.</p>
+    <p class="closer reveal">Because the way you begin your week shapes how you live your life.</p>
+  </div>
+</section>
+
+<!-- ── RESULT ────────────────────────────────────────────────────── -->
+<section class="result" aria-labelledby="result-h2">
+  <div class="wrap">
+    <h2 id="result-h2" class="reveal">The result</h2>
+    <p class="lead reveal">You leave each session feeling more clear, more grounded, and more connected to what matters.</p>
+    <ul class="know-list" role="list">
+      <li class="reveal">You know what needs your attention.</li>
+      <li class="reveal">You know what you&rsquo;re choosing.</li>
+      <li class="reveal">You know what can wait.</li>
+      <li class="reveal">You know where you&rsquo;re headed.</li>
+    </ul>
+    <div class="slab reveal">
+      <p>And most importantly, you remember that <span style="color:var(--yellow)">you are the one leading your life.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS (PLACEHOLDERS) ───────────────────────────────── -->
+<section class="testimonials" aria-labelledby="quotes-h2">
+  <div class="wrap-wide">
+    <h2 id="quotes-h2" class="reveal">Word on the street</h2>
+    <div class="quotes">
+      <figure class="quote is-placeholder reveal">
+        <blockquote>[Testimonial #1 goes here &mdash; 2&ndash;3 sentences about how Mondays feel different now.]</blockquote>
+        <cite>&mdash; [Name], [what they do]</cite>
+      </figure>
+      <figure class="quote is-placeholder reveal">
+        <blockquote>[Testimonial #2 goes here &mdash; ideally a concrete result: something they finally moved forward.]</blockquote>
+        <cite>&mdash; [Name], [what they do]</cite>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ── DETAILS ───────────────────────────────────────────────────── -->
+<section id="details" class="details" aria-labelledby="details-h2">
+  <div class="wrap">
+    <h2 id="details-h2" class="reveal">The details</h2>
+    <div class="ticket reveal">
+      <div class="ticket-cell">
+        <div class="ticket-label">When</div>
+        <div class="ticket-value">Mondays, 10&ndash;11am Pacific</div>
+      </div>
+      <div class="ticket-cell">
+        <div class="ticket-label">Format</div>
+        <div class="ticket-value">Weekly group call</div>
+      </div>
+      <div class="ticket-cell">
+        <div class="ticket-label">Payment</div>
+        <div class="ticket-value">Monthly membership</div>
+        <p class="founders" style="font-weight:500">Cancel anytime</p>
+      </div>
+      <div class="ticket-cell price-cell">
+        <span class="sticker sticker-tomato">Founders</span>
+        <div class="ticket-label">Investment</div>
+        <div class="price"><s>$97</s>$67<small>/mo</small></div>
+        <p class="founders">Founders pricing for the first 10 members.</p>
+      </div>
+      <div class="ticket-cell ticket-wide">
+        <div class="ticket-label">Best for</div>
+        <p>Self-employed people, creatives, flexible-schedule professionals, and anyone who wants a weekly space for depth, planning, and self-connection.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SHAWN ─────────────────────────────────────────────────────── -->
+<section class="shawn" aria-labelledby="shawn-h2">
+  <div class="wrap-wide shawn-grid">
+    <div class="shawn-body">
+      <h2 id="shawn-h2" class="reveal">Hey, I&rsquo;m Shawn.</h2>
+      <p class="reveal">Former software engineer, lifelong question-asker, and someone who&rsquo;s learned firsthand that you can do everything &ldquo;right&rdquo; and still find yourself wondering, <em class="scribble-inline">Wait&hellip; is this even the life I want?</em></p>
+      <p class="reveal">These days, I&rsquo;m interested in what happens when we stop trying to think our way into the perfect plan and start listening to what actually matters to us. I&rsquo;m a fan of questioning the rules, experimenting our way forward, and doing life a little more on our own terms. Less should-ing ourselves to death. <span class="hl"><strong>More cool shit.</strong></span></p>
+      <p class="reveal">I created the RAP Session because I believe making space to pause, reconnect, and choose how we want to show up for the week can change more than just our to-do lists. Come as you are. Bring the messy middle, the big ideas, or the thing you keep meaning to do. Let&rsquo;s get you back in the driver&rsquo;s seat.</p>
+      <span class="shawn-sig reveal">&mdash; Shawn</span>
+    </div>
+    <figure class="polaroid reveal">
+      <img src="st-in-swinging-chair.jpg" alt="Shawn Tuttle in a swinging chair" />
+      <figcaption>your guide</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ── FAQ ───────────────────────────────────────────────────────── -->
+<section id="faq" class="faq" aria-labelledby="faq-h2">
+  <div class="wrap">
+    <h2 id="faq-h2" class="reveal">Questions? Good.</h2>
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>What if I miss a Monday?</summary>
+        <div class="answer"><p>Every session is recorded, so you can catch up whenever it works for you.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Will I have to talk or share in front of the group?</summary>
+        <div class="answer"><p>Nope. The session is mostly silent &mdash; I guide, and you do your own reviewing and planning in your own space. You can share if you want to, but you never have to.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Do I need to be on camera?</summary>
+        <div class="answer"><p>Camera on or off &mdash; whatever feels right that day.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What if I want help with something specific?</summary>
+        <div class="answer"><p>At the end of each session there&rsquo;s optional spot coaching. Stay if you want support with something, or head off into your week.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Do I need a specific project or goal?</summary>
+        <div class="answer"><p>No. You don&rsquo;t need to have a specific project or program you&rsquo;re working through &mdash; just a desire to stop letting the weeks blur by.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What&rsquo;s founders pricing?</summary>
+        <div class="answer"><p>The first 10 members join at $67/month. After that, the price is $97/month.</p></div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Can I cancel?</summary>
+        <div class="answer"><p>Yes, anytime. It&rsquo;s a monthly membership with no long-term commitment.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ─────────────────────────────────────────────────── -->
+<section id="join" class="poster" aria-labelledby="cta-h2">
+  <div class="wrap">
+    <h2 id="cta-h2" class="reveal">Join The RAP Session</h2>
+    <p class="poster-sub reveal">A weekly Review, Alignment &amp; Planning Session to help you start your week with clarity, peace of mind, and your highest self in the driver&rsquo;s seat.</p>
+    <div class="come reveal">
+      <p>Come start your week with intention.</p>
+      <p>Come remember what matters.</p>
+      <p>Come put your best self back at the head of the table.</p>
+    </div>
+    <a href="https://buy.stripe.com/3cIfZhbuF0a93Nr2kn5Rm03" class="btn reveal" target="_blank" rel="noopener">
+      Join The RAP Session
+      <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></svg>
+    </a>
+    <span class="poster-note reveal">Mondays, 10&ndash;11am Pacific &middot; $67/month founders pricing (first 10) &middot; Cancel anytime</span>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p><strong>The RAP Session</strong> &mdash; Review &middot; Alignment &middot; Planning &middot; Every Monday</p>
+</footer>
+
+<script>
+'use strict';
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ─── Fade-in on scroll ────────────────────────────────────────────
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('js');
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
+// ─── Mess lines snap into order once you've looked at them ────────
+const messList = document.getElementById('mess-list');
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  messList.classList.add('is-sorted');
+} else {
+  const messObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => messList.classList.add('is-sorted'), 1400);
+        messObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  messObserver.observe(messList);
+}
+</script>
+
+</body>
+</html>
