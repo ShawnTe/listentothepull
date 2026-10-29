@@ -402,6 +402,41 @@
     border-radius: 16px !important;
   }
 
+  /* RAP Session: a sticker-style mug linking to the weekly session */
+  .band-rap { text-align: center; }
+
+  .rap-link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--olive);
+    text-decoration: none;
+  }
+
+  .rap-mug {
+    width: 132px;
+    height: auto;
+    margin-bottom: 18px;
+    border-radius: 18px;
+    transform: rotate(-8deg);
+    filter: drop-shadow(0 10px 18px rgba(70, 88, 19, 0.28));
+    transition: transform 0.4s cubic-bezier(.3, 1.6, .5, 1);
+  }
+
+  .rap-link:hover .rap-mug,
+  .rap-link:focus-visible .rap-mug { transform: rotate(-2deg) scale(1.06); }
+
+  .rap-link .eyebrow { margin: 0; }
+
+  .rap-link p { margin: 0; }
+
+  .rap-cta {
+    margin-top: 10px;
+    font-weight: 700;
+    color: var(--coral);
+  }
+
   footer {
     background: var(--olive);
     color: var(--cream);
@@ -1334,6 +1369,17 @@ window._load_script = function(url, callback, isSubmit) {
 
 </script>
   </section>
+  </div>
+</div>
+
+<div class="band band-rap">
+  <div class="wrap">
+    <a class="rap-link reveal" href="rap-session/">
+      <img class="rap-mug" src="rap-session/rap-mug-stripe.png" alt="">
+      <h2 class="eyebrow">The RAP Session</h2>
+      <p>A weekly Review, Align &amp; Plan session. Mondays, 10am Pacific, live.</p>
+      <span class="rap-cta">Grab a mug and join us &rarr;</span>
+    </a>
   </div>
 </div>
 
